@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#header {
+	height: 100px;
+}
+
+/*로그인, 회원가입 화면*/
+.refrigeratorDoor {
+	background-color : rgb(44, 62, 80);
+	width : 450px;
+	height: 800px;
+}
+.refrigeratorDoor > a {
+	display: inline-block;
+	height : 110px;
+	width : 100px;
+}

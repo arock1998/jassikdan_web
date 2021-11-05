@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.jassikdan.user.dao.UserDAO">
+
+	<!-- 아이디 중복확인 -->
+	<select id="loginIdIsDupliated" parameterType="string" resultType="boolean">
+		SELECT 
+			COUNT(*)		
+		FROM 
+			`user`
+		WHERE 
+			`loginId` = #{loginId}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insertUser" parameterType="map">
+		INSERT INTO 
+			`user`
+		(
+			`loginId`
+			, `password`
+			, `name`
+			, `birth`
+			, `gender`
+			, `email`
+			, `profileImage`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE
+		(
+			#{loginId}
+			, #{password}
+			, #{name}
+			, #{birth}
+			, #{gender}
+			, #{email}
+			, #{profileImage}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+
+</mapper>
