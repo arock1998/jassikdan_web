@@ -1,9 +1,9 @@
 package com.jassikdan.user.dao;
 
-import java.util.Date;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.jassikdan.user.model.User;
 
 @Repository
 public interface UserDAO {
@@ -21,5 +21,13 @@ public interface UserDAO {
 			, @Param("email") String email
 			, @Param("profileImage") String profileImage
 			);
+	
+	//로그인
+	public User selectUserByLoginIdAndPw(
+			@Param("loginId") String loginId
+			, @Param("password") String password);
+	
+	//user정보 가져오기
+	public User selectUserById(int userId);
 
 }
