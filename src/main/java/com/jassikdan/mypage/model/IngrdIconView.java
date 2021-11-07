@@ -8,7 +8,7 @@ public class IngrdIconView {
 	private String expirationDate; //null 일 수 있다.
 	private String amount;
 	
-	//ingrd 테이블에서 가져오는 정부
+	//ingrd 테이블에서 가져오는 정보
 	private String name	;
 	private String nameEng;
 	private String sort;

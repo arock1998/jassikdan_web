@@ -23,7 +23,7 @@
 	</div>
 	<!-- 냉장실 -->
 	<div class="refrigeratorDoor rounded d-flex align-items-end justify-content-end"> 
-		<a href="/mypage/insert_ingredient_view" type="button" class="btn btn-primary" >
+		<a href="/mypage/insert_ingrd_view" type="button" class="btn btn-primary" >
 		 	plus plus plus
 		</a>
 	</div>

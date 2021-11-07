@@ -18,4 +18,27 @@
 		WHERE 
 			`userId` = #{userId}
 	</select>
+	
+	<!-- 구입한 재료 등록하기 -->
+	<insert id="insertIngrdIhaveList" parameterType="java.util.List">
+		INSERT INTO
+			`ingrd_ihave`
+		(
+			`userId`
+			, `ingrdId`
+			, `amount`
+			, `expirationDate`
+		)
+		VALUES
+		<foreach collection="list" item="ingrd" separator=",">
+		( 
+			#{ingrd.userId}
+			, #{ingrd.ingrdId}
+			, #{ingrd.amount}
+			, #{ingrd.date}
+		
+		)
+			
+		</foreach>
+	</insert>
 </mapper>

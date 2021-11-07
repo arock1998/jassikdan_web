@@ -36,10 +36,10 @@ public class PermissionInterceptor implements HandlerInterceptor{
 		
 		//로그인이 되어있으면 sign_in_view, sign_up_view 를 보여주지 않는다.
 		if(userId != null && uri.startsWith("/user/sign_in_view")) {
-			response.sendRedirect("/mypage/refrigerator");
+			response.sendRedirect("/mypage/refrigerator_view");
 			return false;
 		} else if(userId != null && uri.startsWith("/user/sign_up_view")) {
-			response.sendRedirect("/mypage/refrigerator");
+			response.sendRedirect("/mypage/refrigerator_view");
 			return false;
 		}
 		return true;

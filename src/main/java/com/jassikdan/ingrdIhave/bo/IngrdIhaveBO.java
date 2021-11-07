@@ -1,5 +1,6 @@
 package com.jassikdan.ingrdIhave.bo;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class IngrdIhaveBO {
 	//userId로 냉장고 속 재료 리스트 가져오기
 	public List<IngrdIhave> getIngrdIhaveByUserId(int userId){
 		return ingrdIhaveDAO.selectIngrdIhaveByUserId(userId);
+	}
+	
+	//구매한 재료 등록하기
+	public void insertIngrdIhaveList(List<HashMap<String,Object>> ingrdList) {
+		ingrdIhaveDAO.insertIngrdIhaveList(ingrdList);
 	}
 }

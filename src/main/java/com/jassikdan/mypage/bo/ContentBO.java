@@ -42,5 +42,10 @@ public class ContentBO {
 		}
 		return ingrdList;
 	}
+	
+	//모든 개본 재료 정보 가져오기
+	public List<Ingrd> getIngrdAll(){
+		return ingrdBO.getIngrdAll();
+	}
 
 }

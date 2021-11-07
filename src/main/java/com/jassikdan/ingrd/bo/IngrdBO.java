@@ -1,5 +1,7 @@
 package com.jassikdan.ingrd.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,11 @@ public class IngrdBO {
 	public Ingrd getIngrdById(int ingrdId) {
 		return ingrdDAO.selectIngrdById(ingrdId);
 	}
+	
+	//모든 개본 재료 정보 가져오기
+	public List<Ingrd> getIngrdAll(){
+		return ingrdDAO.selectIngrdAll();
+	}
+
 
 }
