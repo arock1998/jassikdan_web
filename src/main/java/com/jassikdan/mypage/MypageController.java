@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jassikdan.ingrd.model.Ingrd;
 import com.jassikdan.mypage.bo.ContentBO;
+import com.jassikdan.mypage.model.ContentView;
 import com.jassikdan.mypage.model.IngrdIconView;
 
 @Controller
@@ -58,8 +59,19 @@ public class MypageController {
 		return "template/layout";
 	}
 	
-	
-	
-	
+	//내가 등록한 레시피 보여주는 화면
+	@RequestMapping("/mypage/recipe_view")
+	public String mypageRecipeView(Model model
+			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		if(userId == null) {
+			return "redirect:/user/sign_in_view";
+		}
+		List<ContentView> contentList = contentBO.generateContentViewListById(userId);
+		model.addAttribute("contentList", contentList );
+		model.addAttribute("viewName", "mypage/recipe");
+		return "template/layout";
+	}
 	
 }

@@ -6,7 +6,7 @@
 <!-- mypage 탭 -->
 <div class="d-flex">
 	<a href="#" class="bg-info w-50 text-center p-3" >냉장고 관리</a>
-	<a href="/mypage/recipe_list_view" class="bg-success w-50 text-center p-3">내가 올린 레시피</a>
+	<a href="/mypage/recipe_view" class="bg-success w-50 text-center p-3">내가 올린 레시피</a>
 </div>
 <!-- 냉장고 -->
 <div class="d-flex justify-content-around mt-4 mb-5">

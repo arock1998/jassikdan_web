@@ -10,7 +10,10 @@ import com.jassikdan.ingrd.bo.IngrdBO;
 import com.jassikdan.ingrd.model.Ingrd;
 import com.jassikdan.ingrdIhave.bo.IngrdIhaveBO;
 import com.jassikdan.ingrdIhave.model.IngrdIhave;
+import com.jassikdan.mypage.model.ContentView;
 import com.jassikdan.mypage.model.IngrdIconView;
+import com.jassikdan.recipe.bo.RecipeBO;
+import com.jassikdan.recipe.model.Recipe;
 
 @Service
 public class ContentBO {
@@ -19,6 +22,9 @@ public class ContentBO {
 	private IngrdIhaveBO ingrdIhaveBO;
 	@Autowired
 	private IngrdBO ingrdBO;
+	
+	@Autowired
+	private RecipeBO recipeBO;
 	
 	//재료 아이콘 생성하기
 	public List<IngrdIconView> generateIngrdIconViewListById(int userId){
@@ -47,5 +53,19 @@ public class ContentBO {
 	public List<Ingrd> getIngrdAll(){
 		return ingrdBO.getIngrdAll();
 	}
+	
+	//내가 등록한 레세피 보여주기
+	public List<ContentView> generateContentViewListById(int userId){
+		List<ContentView> contentList = new ArrayList<>();
+		List<Recipe> recipeList = recipeBO.getRecipeListByUserId(userId);
+		
+		for(Recipe item : recipeList) {
+			ContentView content = new ContentView();
+			content.setRecipe(item);
+			contentList.add(content);
+		}
+		return contentList;
+	}
+
 
 }

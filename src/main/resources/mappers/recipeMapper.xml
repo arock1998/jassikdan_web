@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.jassikdan.recipe.dao.RecipeDAO">
+	<select id="selectRecipeListByUserId" resultType="com.jassikdan.recipe.model.Recipe">
+		SELECT 
+			`id`
+			, `userId`
+			, `name`
+			, `description`
+			, `nation`
+			, `image`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`recipe`
+		WHERE 
+			`userId` = #{userId}
+	</select>
+</mapper>
