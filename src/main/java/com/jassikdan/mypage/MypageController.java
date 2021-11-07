@@ -59,7 +59,12 @@ public class MypageController {
 		return "template/layout";
 	}
 	
-	//내가 등록한 레시피 보여주는 화면
+	/**
+	 * 내가 등록한 레시피 보여주는 화면
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/mypage/recipe_view")
 	public String mypageRecipeView(Model model
 			, HttpServletRequest request) {

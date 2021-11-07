@@ -14,6 +14,7 @@ import com.jassikdan.mypage.model.ContentView;
 import com.jassikdan.mypage.model.IngrdIconView;
 import com.jassikdan.recipe.bo.RecipeBO;
 import com.jassikdan.recipe.model.Recipe;
+import com.jassikdan.recipeLike.bo.RecipeLikeBO;
 
 @Service
 public class ContentBO {
@@ -25,6 +26,8 @@ public class ContentBO {
 	
 	@Autowired
 	private RecipeBO recipeBO;
+	@Autowired
+	private RecipeLikeBO recipeLikeBO;
 	
 	//재료 아이콘 생성하기
 	public List<IngrdIconView> generateIngrdIconViewListById(int userId){
@@ -61,8 +64,11 @@ public class ContentBO {
 		
 		for(Recipe item : recipeList) {
 			ContentView content = new ContentView();
+			int recipeId = item.getId();
 			content.setRecipe(item);
 			contentList.add(content);
+			content.setLikeYn(recipeLikeBO.isUserLikedRecipe(userId, recipeId));
+			content.setCountLike(recipeLikeBO.countRecipeLike(recipeId));
 		}
 		return contentList;
 	}

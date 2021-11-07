@@ -3,6 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.jassikdan.recipe.dao.RecipeDAO">
+	<!-- 내가 올린 레시피 보여주기 -->
 	<select id="selectRecipeListByUserId" resultType="com.jassikdan.recipe.model.Recipe">
 		SELECT 
 			`id`
@@ -17,5 +18,7 @@
 			`recipe`
 		WHERE 
 			`userId` = #{userId}
+		ORDER BY
+			`createdAt` DESC
 	</select>
 </mapper>
