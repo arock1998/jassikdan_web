@@ -24,4 +24,9 @@ public class IngrdIhaveBO {
 	public void insertIngrdIhaveList(List<HashMap<String,Object>> ingrdList) {
 		ingrdIhaveDAO.insertIngrdIhaveList(ingrdList);
 	}
+	
+	//구매한 재료 삭제
+	public void deleteIngrdIhaveById(int userId, int id) {
+		ingrdIhaveDAO.deleteIngrdIhaveById(userId, id);
+	}
 }

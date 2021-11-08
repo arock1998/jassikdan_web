@@ -38,7 +38,15 @@
 			, #{ingrd.date}
 		
 		)
-			
 		</foreach>
 	</insert>
+	
+	<!-- 구입한 재료 삭제 -->
+	<delete id="deleteIngrdIhaveById" parameterType="map">
+		DELETE FROM
+			`ingrd_ihave`
+		WHERE 
+			`userId` = #{userId} and `id` = #{id};
+	</delete>
+	
 </mapper>

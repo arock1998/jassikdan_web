@@ -3,6 +3,7 @@ package com.jassikdan.ingrdIhave.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.jassikdan.ingrdIhave.model.IngrdIhave;
@@ -16,6 +17,10 @@ public interface IngrdIhaveDAO {
 	//구매한 재료 등록하기
 	public void insertIngrdIhaveList(List<HashMap<String,Object>> ingrdList);
 		
+	//구매한 재료 삭제
+	public void deleteIngrdIhaveById(
+			@Param("userId") int userId
+			, @Param("id") int id);
 	
 	
 	
