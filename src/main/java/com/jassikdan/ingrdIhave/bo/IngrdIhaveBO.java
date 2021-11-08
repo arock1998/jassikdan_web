@@ -1,8 +1,10 @@
 package com.jassikdan.ingrdIhave.bo;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +31,10 @@ public class IngrdIhaveBO {
 	public void deleteIngrdIhaveById(int userId, int id) {
 		ingrdIhaveDAO.deleteIngrdIhaveById(userId, id);
 	}
+	
+	//재료사용
+	public void updateAmountByUserIdAndRecipeId(int userId, int ingrdId, int remain, Date createdAt) {
+		ingrdIhaveDAO.updateAmountByUserIdAndRecipeId(userId, ingrdId, remain, createdAt);
+	}
+	
 }

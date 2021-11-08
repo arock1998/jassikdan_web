@@ -49,4 +49,14 @@
 			`userId` = #{userId} and `id` = #{id};
 	</delete>
 	
+	<!-- 재료 사용 -->
+	<update id="updateAmountByUserIdAndRecipeId" parameterType="map">
+		UPDATE 
+			`ingrd_ihave`
+		SET
+			`amount` = #{amount}
+		WHERE
+			`userId` = #{userId} AND `ingrdId` = #{ingrdId} AND `createdAt` = #{createdAt};
+	</update>
+	
 </mapper>

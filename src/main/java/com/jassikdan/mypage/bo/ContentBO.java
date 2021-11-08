@@ -1,6 +1,7 @@
 package com.jassikdan.mypage.bo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import com.jassikdan.recipe.model.Recipe;
 import com.jassikdan.recipeIngrd.bo.RecipeIngrdBO;
 import com.jassikdan.recipeIngrd.model.RecipeIngrd;
 import com.jassikdan.recipeLike.bo.RecipeLikeBO;
-import com.mysql.cj.util.StringUtils;
 
 @Service
 public class ContentBO {
@@ -84,12 +84,6 @@ public class ContentBO {
 		List<ContentView> contentList = new ArrayList<>();
 		List<Recipe> recipeList = recipeBO.getAllRecipe();
 
-		/*	private Recipe recipe;
-	private boolean likeYn;
-	private int countLike;
-	private List<String> sharp;
-	private int score;*/
-		
 		for (Recipe recipe : recipeList) {
 			ContentView content = new ContentView();
 			int recipeId = recipe.getId();
@@ -138,5 +132,32 @@ public class ContentBO {
 			}
 		}
 		return contentList;
+	}
+	
+	//레시피 선택으로 냉장고속 재료 사용
+	public void useRecipe(int userId, int recipeId) {
+		
+		List<RecipeIngrd> recipeIngrdList = recipeIngrdBO.getRecipeIngrdById(recipeId);
+		List<IngrdIhave> ingrdIhaveList = ingrdIhaveBO.getIngrdIhaveByUserId(userId);
+		
+		for(RecipeIngrd recipeIngrd : recipeIngrdList) {
+			for(IngrdIhave ingrdIhave : ingrdIhaveList) {
+				
+				//만약 레시피에 사용되는 재료가 냉장고 속에 있다면
+				if(ingrdIhave.getIngrdId() == recipeIngrd.getIngrdId()) {
+					
+					//같은 재료가 두번 등록되어있을 수 있으므로 제약조건을 하나 더 걸어주자
+					Date createdAt = ingrdIhave.getCreatedAt();
+					int ingrdId = ingrdIhave.getIngrdId();
+					
+					//사용하고 남는 재료량
+					int remain = ingrdIhave.getIngrdId() - recipeIngrd.getIngrdId();
+					if(remain < 0) {
+						remain = 0;
+					} 
+					ingrdIhaveBO.updateAmountByUserIdAndRecipeId(userId, ingrdId, remain, createdAt);
+				}
+			}
+		}
 	}
 }

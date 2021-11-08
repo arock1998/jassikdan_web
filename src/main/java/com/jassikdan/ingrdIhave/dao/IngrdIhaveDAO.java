@@ -1,5 +1,6 @@
 package com.jassikdan.ingrdIhave.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +23,10 @@ public interface IngrdIhaveDAO {
 			@Param("userId") int userId
 			, @Param("id") int id);
 	
-	
-	
+	//재료사용
+	public void updateAmountByUserIdAndRecipeId(
+			@Param("userId") int userId
+			, @Param("ingrdId") int ingrdId
+			, @Param("remain") int remain
+			, @Param("createdAt") Date createdAt);
 }
