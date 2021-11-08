@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jassikdan.mypage.bo.ContentBO;
@@ -22,17 +22,14 @@ public class TimelineController {
 	@Autowired
 	private ContentBO contentBO;
 	
-	@RequestMapping("/timeline/timeline")
+	@GetMapping("/timeline/timeline")
 	public String timeline(Model model
 			, HttpServletRequest request
-			, @RequestParam(value="data", required=false) String data
-			, @RequestParam(value= "test", required=false) String test
+			, @RequestParam(value="data", required=false,  defaultValue="[]") String data
 			//냉장고 속 재료로만이 true인지 아닌지
 			//List의 size가 0일 수 있다.
 			//, @RequestParam("useHavingIngredient") boolean useHavingIngredient
 			) {
-		
-		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		if(userId == null) {
@@ -46,13 +43,12 @@ public class TimelineController {
 			List<String> dataList = Arrays.asList(data.split(","));
 			sharpList.addAll(dataList);
 		}
-//		model.addAttribute("sharpList", sharpList);
+		//view에서 가지고 온 sharpList를 다시 view로 전달해준다.
+		model.addAttribute("sharpList", sharpList);
 		
-		model.addAttribute("contents", contentBO.generateAllContentView(userId, sharpList));
+		model.addAttribute("contentList", contentBO.generateAllContentView(userId, sharpList));
 		model.addAttribute("result", "success");
 		model.addAttribute("viewName", "timeline/timeline");
-		//view에서 가지고 온 sharpList를 다시 view로 전달해준다.
-		
 		return "template/layout";
 	}
 	

@@ -84,6 +84,12 @@ public class ContentBO {
 		List<ContentView> contentList = new ArrayList<>();
 		List<Recipe> recipeList = recipeBO.getAllRecipe();
 
+		/*	private Recipe recipe;
+	private boolean likeYn;
+	private int countLike;
+	private List<String> sharp;
+	private int score;*/
+		
 		for (Recipe recipe : recipeList) {
 			ContentView content = new ContentView();
 			int recipeId = recipe.getId();
@@ -101,8 +107,36 @@ public class ContentBO {
 				sharpList.add(item.getIngrdName());
 			}
 			content.setSharp(sharpList);
-			contentList.add(content);
+
+			// 관련있는 것에 점수 부여
+			for (String sharpStr : sharpList) {
+				if(sharpStr != "") {
+					for (String searchSharp : searchSharpList) {
+						if(searchSharp != "") {
+							if (sharpStr.contains(searchSharp) || searchSharp.contains(sharpStr)) {
+								recipeScore += 1;
+							}
+						}
+					}
+				}
 			}
+			content.setScore(recipeScore);
+			
+			// 점수가 높을수록 앞으로 보낸다
+			if (recipeScore >= 1) {
+				int index = 0;
+				for (ContentView item : contentList) {
+					if (recipeScore < item.getScore()) {
+						index++; // 인덱스
+					} else {
+						contentList.add(index, content);
+						break;
+					}
+				}
+			} else {
+				contentList.add(content);
+			}
+		}
 		return contentList;
 	}
 }

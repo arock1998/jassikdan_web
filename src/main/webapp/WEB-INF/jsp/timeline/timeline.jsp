@@ -2,14 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 검색창 -->
-<div class="input-group mb-3">
-  	<input type="text" id="searchText" class="form-control" placeholder="검색어를 입력하세요">
- 	 <div class="input-group-append">
-    	<button id="searchBtn" class="btn btn-outline-secondary" type="button">Search</button>
+	<div class="input-group mb-3">
+	  	<input type="text" id="searchText" class="form-control" placeholder="검색어를 입력하세요">
+	 	 <div class="input-group-append">
+	    	<button id="searchBtn" class="btn btn-outline-secondary" type="button">Search</button>
+		</div>
 	</div>
+<!-- 샾검색어 상자 -->
+<div class="sharpKeyWordBox">
+	<label for="onlyIngrdRefrigerator" class="mx-2">#냉장고 속 재료로만 검색 <input type="checkbox" id="onlyIngrdRefrigerator" class=""></label> 
+	<span class="mx-2 deleteSpan">#검색어 <a href="#" class="sharpKeyWordDelete">X</a></span>
+	<span class="mx-2 deleteSpan">#검색어 <a href="#" class="sharpKeyWordDelete">X</a></span>
+	<c:forEach items="${sharpList}" var="sharp">
+	<c:if test="${sharp ne ''}">
+		<span class="mx-2 deleteSpan">#<span class="sharpKeyWord">${sharp}</span><a href="#" class="sharpKeyWordDelete">X</a></span	>
+	</c:if>
+	</c:forEach>
 </div>
 <!-- 검색결과를 보여준다. -->
-<c:forEach items="${contents}" var="content">
+<c:forEach items="${contentList}" var="content">
 	<div class="recipeBox bg-light mt-3 d-flex">
 		<div class="mx-5 my-3">
 			<h3>${content.recipe.name}</h3>
@@ -66,8 +77,8 @@
 			var paramList =  JSON.stringify(list);
 			alert(paramList);
 			
- 			$.ajax({
-				type:'post'
+  			$.ajax({
+				type:'get'
 				, url: '/timeline/timeline'
 				, data: { "data" : paramList}
 				, dataType: 'json'
@@ -79,9 +90,10 @@
 				, error: function(e){
 					alert('error' + e);
 				}
-			});
+			}); 
+			
+			
 		});	
-		
 		
 		//좋아요 버튼 클릭
 		$('.likeBtn').on('click', function(e){
@@ -89,9 +101,9 @@
 			var recipeId = $(this).data('recipe-id');
 			var likeYn = $(this).data('like-yn');
 			 if(likeYn){
-					var url = '/recipeLike/delete';
+					var url = '/recipe_like/delete';
 				} else if(likeYn == false){
-					var url = '/recipeLike/create';
+					var url = '/recipe_like/create';
 				}
 			$.ajax({
 				type : 'post'
