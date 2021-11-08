@@ -21,4 +21,20 @@
 		ORDER BY
 			`createdAt` DESC
 	</select>
+	
+	<!-- 모든 레시피 가져오기 -->
+	<select id="selectAllRecipe" resultType="com.jassikdan.recipe.model.Recipe">
+		SELECT 
+			`id`
+			, `userId`
+			, `name`
+			, `description`
+			, `nation`
+			, `image`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`recipe`
+		limit 20;
+	</select>
 </mapper>

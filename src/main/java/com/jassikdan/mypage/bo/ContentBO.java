@@ -14,7 +14,10 @@ import com.jassikdan.mypage.model.ContentView;
 import com.jassikdan.mypage.model.IngrdIconView;
 import com.jassikdan.recipe.bo.RecipeBO;
 import com.jassikdan.recipe.model.Recipe;
+import com.jassikdan.recipeIngrd.bo.RecipeIngrdBO;
+import com.jassikdan.recipeIngrd.model.RecipeIngrd;
 import com.jassikdan.recipeLike.bo.RecipeLikeBO;
+import com.mysql.cj.util.StringUtils;
 
 @Service
 public class ContentBO {
@@ -28,6 +31,8 @@ public class ContentBO {
 	private RecipeBO recipeBO;
 	@Autowired
 	private RecipeLikeBO recipeLikeBO;
+	@Autowired
+	private RecipeIngrdBO recipeIngrdBO;
 	
 	//재료 아이콘 생성하기
 	public List<IngrdIconView> generateIngrdIconViewListById(int userId){
@@ -73,5 +78,31 @@ public class ContentBO {
 		return contentList;
 	}
 
+	
+	//timeline에서 보여줄 ContentView
+	public List<ContentView> generateAllContentView(int userId, List<String> searchSharpList) {
+		List<ContentView> contentList = new ArrayList<>();
+		List<Recipe> recipeList = recipeBO.getAllRecipe();
 
+		for (Recipe recipe : recipeList) {
+			ContentView content = new ContentView();
+			int recipeId = recipe.getId();
+			int recipeScore = 0;
+
+			content.setRecipe(recipe);
+			content.setLikeYn(recipeLikeBO.isUserLikedRecipe(userId, recipeId));
+			content.setCountLike(recipeLikeBO.countRecipeLike(recipeId));
+			List<String> sharpList = new ArrayList<>();
+
+			// 데이터 상으로는 한식, 중국, 일본, 이탈리아, 서양, 퓨전, 동남아시아로 나뉘어져 있다.
+			String nation = recipe.getNation();
+			sharpList.add(nation);
+			for(RecipeIngrd item :recipeIngrdBO.getRecipeIngrdById(recipeId)) {
+				sharpList.add(item.getIngrdName());
+			}
+			content.setSharp(sharpList);
+			contentList.add(content);
+			}
+		return contentList;
+	}
 }

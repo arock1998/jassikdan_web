@@ -18,4 +18,11 @@ public class RecipeBO {
 	public List<Recipe> getRecipeListByUserId(int userId){
 		return recipeDAO.selectRecipeListByUserId(userId);
 	}
+	
+	//모든 레시피를 가져오기
+	public List<Recipe> getAllRecipe(){
+		return recipeDAO.selectAllRecipe();
+	}
+	
+	
 }

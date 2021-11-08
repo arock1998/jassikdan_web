@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.jassikdan.recipeIngrd.dao.RecipeIngrdDAO">
+	<!-- 레시피에 들어가는 재료 가져오기 -->
+	<select id="selectRecipeIngrdById" resultType="com.jassikdan.recipeIngrd.model.RecipeIngrd">
+		SELECT 
+			`id`
+			, `recipeId`
+			, `ingrdId`
+			, `ingrdName`
+			, `amount`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`recipe_ingrd`
+		WHERE 
+			recipeId = #{recipeId}
+	</select>
+</mapper>
