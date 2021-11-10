@@ -20,6 +20,7 @@ public class TimelineController {
 	@Autowired
 	private ContentBO contentBO;
 	
+	// formData를 보내거나 완전히 방법을 바꾸거나 해야 될 것 같다.
 	@RequestMapping("/timeline/timeline")
 	public String timeline(Model model
 			, HttpServletRequest request
@@ -41,8 +42,6 @@ public class TimelineController {
 //			List<String> dataList = Arrays.asList(sharp.split(","));
 //			sharpList.addAll(dataList);
 //		}
-		
-		
 		
 		sharpList.addAll(sharpList);
 		

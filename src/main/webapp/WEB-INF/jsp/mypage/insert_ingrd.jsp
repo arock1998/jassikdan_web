@@ -62,7 +62,6 @@
 </div>
 <button id="submitBtn" type="submit" class="btn btn-secondary w-50">저장하기</button>
 
-
 <script>
 $(document).ready(function(){
 		//아직 동작하지 않는다.

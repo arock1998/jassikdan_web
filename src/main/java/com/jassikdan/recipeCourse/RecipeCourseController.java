@@ -91,15 +91,20 @@ public class RecipeCourseController {
 		return "template/layout";
 	}
 	
-	//
+	//레시피 조리과정을 등록 순서 별로 보여주는 뷰
 	@GetMapping("/recipe/insert_detail_view")
 	public String recipeInsertDetailView(
 			@RequestParam("cookingNo") int cookingNo
 			, Model model
 			, HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		if (session.getAttribute("recipeCourse"+ cookingNo) != null) {	//순서에 해당하는 조리과정을 등록하고 있었다면 등록하던 것을 보여준다. 
+			RecipeCourse recipeCourse = (RecipeCourse) session.getAttribute("recipeCourse"+ cookingNo);
+			model.addAttribute("recipeCourse", recipeCourse);
+		}
 		
-			model.addAttribute("cookingNo", cookingNo);
+		model.addAttribute("cookingNo", cookingNo);
+		model.addAttribute("viewName", "recipe/insert_detail");
 		return "template/layout";
 	}
 	
