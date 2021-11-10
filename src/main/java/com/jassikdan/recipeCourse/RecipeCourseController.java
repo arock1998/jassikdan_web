@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jassikdan.ingrdIhave.bo.IngrdIhaveBO;
@@ -20,6 +21,7 @@ import com.jassikdan.recipeIngrd.model.RecipeIngrd;
 
 @Controller
 public class RecipeCourseController {
+	//다른 controller로 이동해야 할 것 같다. 
 	
 	@Autowired
 	private RecipeCourseBO recipeCourseBO;
@@ -35,7 +37,7 @@ public class RecipeCourseController {
 	 * @param cookingNo
 	 * @return
 	 */
-	@GetMapping("/mypage/detail_view")
+	@GetMapping("/recipe/detail_view")
 	public String recipeCourseDetailView(Model model
 			, @RequestParam("recipeId") int recipeId
 			, @RequestParam(value="cookingNo", defaultValue="1") int cookingNo
@@ -81,4 +83,26 @@ public class RecipeCourseController {
 		model.addAttribute("viewName", "recipe/detail");
 		return "template/layout";
 	}
+
+	//레시피 썸네일 등록
+	@RequestMapping("/recipe/insert_view")
+	public String recipeInsertView(Model model) {
+		model.addAttribute("viewName", "recipe/insert");
+		return "template/layout";
+	}
+	
+	//
+	@GetMapping("/recipe/insert_detail_view")
+	public String recipeInsertDetailView(
+			@RequestParam("cookingNo") int cookingNo
+			, Model model
+			, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+			model.addAttribute("cookingNo", cookingNo);
+		return "template/layout";
+	}
+	
+	
+	
 }

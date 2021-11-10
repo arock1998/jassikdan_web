@@ -6,7 +6,7 @@
 <div class="d-flex courseContent justify-content-around mb-3" data-recipe-id="${recipeId}" data-count="${count}" data-num="${cookingNo}">
 	<!-- 이전버튼 -->
 	<div class="arrowBox mb-3 d-flex align-items-center ">
-		<a href="/mypage/detail_view?recipeId=${recipeId}&cookingNo=${cookingNo-1}" class="prev"><img src="/static/images/icon/prev.png" class="w-100" ></a>
+		<a href="/recipe/detail_view?recipeId=${recipeId}&cookingNo=${cookingNo-1}" class="prev"><img src="/static/images/icon/prev.png" class="w-100" ></a>
 	</div>
 	<!-- 레시피 정보를 보여준다. -->
     <div class="courseBox bg-light center-block">
@@ -16,7 +16,7 @@
 	</div>	
 	<!-- 다음 버튼 -->
 	<div class="arrowBox d-flex align-items-center">
-		<a href="/mypage/detail_view?recipeId=${recipeId}&cookingNo=${cookingNo+1}" class="next"><img src="/static/images/icon/next.png" ></a>
+		<a href="/recipe/detail_view?recipeId=${recipeId}&cookingNo=${cookingNo+1}" class="next"><img src="/static/images/icon/next.png" ></a>
 	</div>
 </div>
 <button type="button" class="btn btn-primary w-100 mb-5" data-toggle="modal" data-target="#courseModal">이 레시피 사용하기</button>
@@ -85,6 +85,7 @@
 		
 		//재료 사용하여 레시피 만들기
 		$('#useRecipeBtn').on('click', function(){
+			var recipeId = $('.courseContent').data('recipeId');
 			$.ajax({
 				type:'post'
 				, url:'/mypage/use_recipe'

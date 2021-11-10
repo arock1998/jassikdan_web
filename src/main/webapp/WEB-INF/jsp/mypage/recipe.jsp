@@ -17,7 +17,7 @@
 				<h3>${content.recipe.name}</h3>
 				<div class="d-flex">
 					<div class="mr-5">
-						<a href="/mypage/detail_view?recipeId=${content.recipe.id}"><img src="${content.recipe.image}" class="mt-2" width="400px" height="400px"></a>
+						<a href="/recipe/detail_view?recipeId=${content.recipe.id}"><img src="${content.recipe.image}" class="mt-2" width="400px" height="400px"></a>
 					</div>
 					<div class="mt-1">
 						<!-- 레시피 설명 부분 -->

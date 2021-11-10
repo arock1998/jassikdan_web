@@ -47,9 +47,10 @@
 	font-size:1.5em;
 }
 
+
+/*요리과정 detail*/
 .courseContent {
 	height: 800px;
-	
 }
 .courseBox {
 	height: 800px;
@@ -69,7 +70,6 @@
 	width : 150px;
 	width : 200px;	
 }
-
 .courseModalBtn {
 	height : 80px;
 }

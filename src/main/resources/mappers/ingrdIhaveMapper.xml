@@ -36,7 +36,6 @@
 			, #{ingrd.ingrdId}
 			, #{ingrd.amount}
 			, #{ingrd.date}
-		
 		)
 		</foreach>
 	</insert>
