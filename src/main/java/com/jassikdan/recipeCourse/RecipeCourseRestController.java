@@ -21,7 +21,8 @@ public class RecipeCourseRestController {
 	//레시피 썸네일 세션에 저장
 	@PostMapping("/recipe/insert")
 	public Map<String, Object> recipeInsert(
-			@ModelAttribute Recipe recipe
+//			@ModelAttribute Recipe recipe
+			@RequestParam("description") String description
 			, HttpServletRequest request){
 		HttpSession session = request.getSession();
 		//id 가져와서 재료등록
@@ -29,7 +30,7 @@ public class RecipeCourseRestController {
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "error");
 		//저장된 recipe를 세션에 저장해둔다.
-		session.setAttribute("recipe", recipe);
+//		session.setAttribute("recipe", recipe);
 		result.put("result", "success");
 		return result;
 	}

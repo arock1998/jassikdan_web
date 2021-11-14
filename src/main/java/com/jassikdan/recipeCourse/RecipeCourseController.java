@@ -37,7 +37,7 @@ public class RecipeCourseController {
 	 * @param cookingNo
 	 * @return
 	 */
-	@GetMapping("/recipe/detail_view")
+	@GetMapping("/recipe/")
 	public String recipeCourseDetailView(Model model
 			, @RequestParam("recipeId") int recipeId
 			, @RequestParam(value="cookingNo", defaultValue="1") int cookingNo
@@ -85,14 +85,14 @@ public class RecipeCourseController {
 	}
 
 	//레시피 썸네일 등록
-	@RequestMapping("/recipe/insert_view")
+	@RequestMapping("/recipe/create_view")
 	public String recipeInsertView(Model model) {
 		model.addAttribute("viewName", "recipe/insert");
 		return "template/layout";
 	}
 	
 	//레시피 조리과정을 등록 순서 별로 보여주는 뷰
-	@GetMapping("/recipe/insert_detail_view")
+	@GetMapping("/recipe/create_detail_view")
 	public String recipeInsertDetailView(
 			@RequestParam("cookingNo") int cookingNo
 			, Model model
@@ -107,7 +107,5 @@ public class RecipeCourseController {
 		model.addAttribute("viewName", "recipe/insert_detail");
 		return "template/layout";
 	}
-	
-	
 	
 }
