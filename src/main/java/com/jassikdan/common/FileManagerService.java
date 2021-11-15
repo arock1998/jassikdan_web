@@ -54,7 +54,7 @@ public class FileManagerService {
 	
 	//이미지 저장 
 	public String saveRecipe(Integer userId, long currentTimeMillis, MultipartFile file) throws IOException {
-		String directoryName = userId + "_" + System.currentTimeMillis() + "/";		//음식이름_시간/ 파일이름이 한국어일때....
+		String directoryName = userId + "_" + System.currentTimeMillis() + "/";		//음식이름_시간/ 파일이름이 한국어z일때....
 		String filePath = FILE_UPLOAD_PATH + directoryName;
 		
 		File directory = new File(filePath);
