@@ -95,7 +95,7 @@
 						alert('이 레시피를 사용하셨습니다.');
 					}
 				}, error : function(e){
-					alert('errpr:' + e);
+					alert('error:' + e);
 				}
 			});
 		});

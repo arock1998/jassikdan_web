@@ -1,5 +1,6 @@
 package com.jassikdan.recipeCourse;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,26 +12,46 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.jassikdan.common.FileManagerService;
 import com.jassikdan.recipe.model.Recipe;
 import com.jassikdan.recipeCourse.model.RecipeCourse;
 
 @RestController
 public class RecipeCourseRestController {
+	
+	private FileManagerService fileManagerSerice = new FileManagerService();
 
 	//레시피 썸네일 세션에 저장
 	@PostMapping("/recipe/insert")
 	public Map<String, Object> recipeInsert(
-//			@ModelAttribute Recipe recipe
-			@RequestParam("description") String description
+			@RequestParam("name") String name
+			, @RequestParam("description") String description
+			, @RequestParam("image") MultipartFile image
 			, HttpServletRequest request){
 		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		long currentTimeMillis = System.currentTimeMillis();
+		session.setAttribute("currentTimeMillis", currentTimeMillis);
 		//id 가져와서 재료등록
 		//id 가져와서 세션에 저장
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "error");
 		//저장된 recipe를 세션에 저장해둔다.
-//		session.setAttribute("recipe", recipe);
+		
+		Recipe recipe = new Recipe();
+		recipe.setName(name);
+		recipe.setDescription(description);
+		String filePath = "";
+		try {
+			filePath = fileManagerSerice.saveRecipe(userId, currentTimeMillis, image);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		recipe.setImage(filePath);
+		session.setAttribute("recipe", recipe);
+		
 		result.put("result", "success");
 		return result;
 	}
@@ -38,16 +59,30 @@ public class RecipeCourseRestController {
 	//view에서 get으로 받은 cookingNo를 받아서 순서대로 저장하자
 	@PostMapping("/recipe/insert_detail")
 	public Map<String, Object> recipeInsertDetail(
-			@ModelAttribute RecipeCourse recipeCourse
-			, @RequestParam("cookingNo") int cookingNo
+			@RequestParam("cookingNo") int cookingNo
+			, @RequestParam("description") String description
+			, @RequestParam("image") MultipartFile image
 			, HttpServletRequest request){
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "error");
-		//순서대로 저장
-		HttpSession session = request.getSession();
-		session.setAttribute("recipeCourse" + cookingNo, recipeCourse);
 		
+		RecipeCourse recipeCourse = new RecipeCourse();
+		recipeCourse.setCookingNo(cookingNo);
+		recipeCourse.setDescription(description);
+		long currentTimeMillis = (long)session.getAttribute("currentTimeMillis");	//이게 null인경우가 생긴다
+		String filePath = "";
+		try {
+			filePath = fileManagerSerice.saveRecipe(userId, currentTimeMillis, image);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		recipeCourse.setImage(filePath);
+		
+		//순서대로 저장
+		session.setAttribute("recipeCourse" + cookingNo, recipeCourse);
 		result.put("result", "success");
 		return result;
 	}

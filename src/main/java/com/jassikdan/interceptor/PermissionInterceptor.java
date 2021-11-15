@@ -41,6 +41,10 @@ public class PermissionInterceptor implements HandlerInterceptor{
 			response.sendRedirect("/user/sign_in_view");
 			return false;
 		}
+		if(userId == null && uri.startsWith("/recipe")) {
+			response.sendRedirect("/user/sign_in_view");
+			return false;
+		}
 		
 		
 		//로그인이 되어있으면 sign_in_view, sign_up_view 를 보여주지 않는다.

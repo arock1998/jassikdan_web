@@ -2,6 +2,7 @@ package com.jassikdan.test;
 
 import java.util.List;
 
+import org.apache.ibatis.io.ResolverUtil.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jassikdan.test.bo.TestBO;
-import com.jassikdan.test.model.Test;
 
 @Controller
 public class TestController {
@@ -29,5 +29,4 @@ public class TestController {
 		model.addAttribute("testData", testData);
 		return "test";
 	}
-
 }
