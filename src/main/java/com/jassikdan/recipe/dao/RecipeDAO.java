@@ -15,4 +15,7 @@ public interface RecipeDAO {
 	//모든 레시피를 가져오기
 	public List<Recipe> selectAllRecipe();
 	
+	//레시피 첫화면 등록
+	public void insertRecipe(Recipe recipe);
+	
 }

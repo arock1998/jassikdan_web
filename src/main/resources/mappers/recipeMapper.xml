@@ -37,4 +37,29 @@
 			`recipe`
 		limit 20;
 	</select>
+	
+	<!-- 레시피 첫 화면 등록 -->
+	<insert id="insertRecipe" parameterType="com.jassikdan.recipe.model.Recipe" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			`recipe` 
+		(
+			`userId`
+			, `name`
+			, `description`
+			, `nation`
+			, `image`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE
+		(
+			#{userId}
+			, #{name}
+			, #{description}
+			, #{nation}
+			, #{image}
+			, NOW()
+			, NOW()
+		)
+	</insert>
 </mapper>

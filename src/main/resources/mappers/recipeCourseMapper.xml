@@ -18,4 +18,27 @@
 		WHERE 
 			`recipeId` = #{recipeId}
 	</select>
+	
+	<!-- 레시피 과정정보 등록하기 -->
+	<insert id="insertRecipeCourse" parameterType="com.jassikdan.recipeCourse.model.RecipeCourse">
+		INSERT INTO
+			`recipe_course`
+		(
+			`recipeId`
+			, `cookingNo`
+			, `description`
+			, `image`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUE 
+		(
+			#{recipeId}
+			, #{cookingNo}
+			, #{description}
+			, #{image}
+			, NOW()
+			, NOW()
+		)
+	</insert>
 </mapper>

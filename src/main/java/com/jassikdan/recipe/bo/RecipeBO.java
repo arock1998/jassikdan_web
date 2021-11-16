@@ -24,5 +24,10 @@ public class RecipeBO {
 		return recipeDAO.selectAllRecipe();
 	}
 	
+	//레시피 첫화면 등록
+	public void insertRecipe(Recipe recipe) {
+		recipeDAO.insertRecipe(recipe);
+	}
+	
 	
 }
