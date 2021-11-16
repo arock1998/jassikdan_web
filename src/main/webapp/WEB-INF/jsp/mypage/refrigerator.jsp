@@ -24,8 +24,8 @@
 	<!-- 냉장실 -->
 	<div class="refrigeratorDoor rounded d-flex align-items-end justify-content-end"> 
 		<!-- 재료 추가하기 뷰로 가는 버튼 -->
-		<a href="/mypage/insert_ingrd_view" type="button" class="btn btn-primary" >
-		 	plus plus plus
+		<a href="/mypage/insert_ingrd_view" type="button" class="btn " >
+		 	<img src="https://w7.pngwing.com/pngs/833/426/png-transparent-black-shopping-cart-icon-for-free-black-shopping-cart-icon.png" class="w-100 h-100">
 		</a>
 	</div>
 </div>

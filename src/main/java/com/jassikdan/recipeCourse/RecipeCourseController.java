@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -96,7 +95,6 @@ public class RecipeCourseController {
 		if(userId == null) {
 			return "redirect:/user/sign_in_view";
 		}
-
 		model.addAttribute("viewName", "recipe/insert");
 		return "template/layout";
 	}
@@ -116,14 +114,13 @@ public class RecipeCourseController {
 			RecipeCourse recipeCourse = (RecipeCourse) session.getAttribute("recipeCourse"+ cookingNo);
 			model.addAttribute("recipeCourse", recipeCourse);
 		}
-		
 		model.addAttribute("cookingNo", cookingNo);
 		model.addAttribute("viewName", "recipe/insert_detail");
 		return "template/layout";
 	}
 	
 	//저장 전 모든 내용을 보여주는 뷰
-	@PostMapping("/recipe/insert_confirm")
+	@RequestMapping("/recipe/insert_confirm_view")
 	public String recipeInsertConfirm(
 			Model model
 			, HttpServletRequest request
@@ -138,7 +135,7 @@ public class RecipeCourseController {
 		Recipe recipe = (Recipe) session.getAttribute("recipe");
 		//레시피 과정 세션에서 받아오기
 		List<RecipeCourse> recipeCourseList = new ArrayList<>();
-		int i = 0;
+		int i = 1;
 		while((RecipeCourse) session.getAttribute("recipeCourse" + i) != null) {
 			RecipeCourse item = (RecipeCourse) session.getAttribute("recipeCourse" + i);
 			recipeCourseList.add(item);

@@ -18,4 +18,9 @@ public class RecipeCourseBO {
 	public List<RecipeCourse> getRecipeCourseByRecipeId(int recipeId){
 		return recipeCourseDAO.selectRecipeCourseByRecipeId(recipeId);
 	}
+	
+	//레시피 과정정보 등록하기
+	public void insertRecipeCourse(RecipeCourse recipeCourse) {
+		recipeCourseDAO.insertRecipeCourse(recipeCourse);
+	}
 }

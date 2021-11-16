@@ -10,14 +10,18 @@
 		<a href="/recipe/create_detail_view?cookingNo=${cookingNo-1}" class="prev"><img src="/static/images/icon/prev.png" class="w-100" ></a>
 	</div>
 	<!-- 레시피 정보를 등록할 수 있다. -->
- 	<div class="courseBox">
+ 	<div class="courseBox" class="">
+ 		<h4>${cookingNo}번째 과정</h4>
  		<c:if test="${recipeCourse ne null}">
-			<img src="${recipeCourse.image}" class="h-75 w-100"><!-- 사진 파일 등록이 요소는 아니지만 필수로 받기로 하자 -->
-			<!-- recipe 정보가 있을 경우 레시피 정보를 보여준다 img src를 사용해서 -->
+ 			<div class="mb-2 p-3 w-25 h-25">
+				<img src="${recipeCourse.image}" class="w-75 h-75"><br>
+				<small class="text-secondary">등록되어있던 이미지</small>
+			</div>
+			<input class="form-control courseImage w-100" type="file">
 			<input class="form-control description w-100 mt-3" name="description" type="text" placeholder="음식설명" value="${recipeCourse.description}">
 		</c:if>
 		<c:if test="${recipeCourse eq null }">
-			<input class="form-control courseImage h-75 w-100" type="file"><!-- 사진 파일 등록이 요소는 아니지만 필수로 받기로 하자 -->
+			<input class="form-control courseImage w-100" type="file">
 			<!-- recipe 정보가 있을 경우 레시피 정보를 보여준다 img src를 사용해서 -->
 			<input class="form-control description w-100 mt-3" name="description" type="text" placeholder="음식설명" >
 		</c:if>
@@ -72,10 +76,14 @@
 		//다음 버튼을 눌렸을 때
 		$('.next').on('click', function(e){
 			e.preventDefault();
+			var seletedImage = $('.courseBox img').attr('src');
 			var courseImage = $('.courseImage').val();
 			var description = $('.description').val().trim();
-			if(courseImage == ''){
+			if(courseImage == '' && seletedImage == ''){
 				alert('이미지를 등록해주세요');
+				return false;
+			} else if(seletedImage != '' && courseImage == ''){
+				alert('이미지를 다시 등록해주세요');
 				return false;
 			}
 			if(description == ''){
@@ -87,7 +95,9 @@
 			let formData = new FormData();
 			formData.append('cookingNo', cookingNo);
 			formData.append('description', description);
-			formData.append('image', $('.courseImage')[0].files[0]);
+			if(courseImage != ''){
+				formData.append('image', $('.courseImage')[0].files[0]);
+			}
 			
 			$.ajax({
 				type:'post'
@@ -109,10 +119,14 @@
 		
 		//저장하기 버튼 클릭
 		$('#saveCourseBtn').on('click', function(){
+			var seletedImage = $('.courseBox img').attr('src');
 			var courseImage = $('.courseImage').val();
 			var description = $('.description').val().trim();
-			if(courseImage == ''){
+			if(courseImage == '' && seletedImage == ''){
 				alert('이미지를 등록해주세요');
+				return;
+			} else if(seletedImage != '' && courseImage == ''){
+				alert('이미지를 다시 등록해주세요');
 				return;
 			}
 			if(description == ''){
@@ -135,7 +149,7 @@
 				, contentType: false
 				, success : function(data){
 					if(data.result == 'success'){
-						location.href = '/recipe/insert_confirm';
+						location.href = '/recipe/insert_confirm_view';
 					}
 				}
 				, error : function(e){

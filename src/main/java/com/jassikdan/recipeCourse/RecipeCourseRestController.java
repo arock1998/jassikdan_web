@@ -7,28 +7,35 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jassikdan.common.FileManagerService;
+import com.jassikdan.recipe.bo.RecipeBO;
 import com.jassikdan.recipe.model.Recipe;
+import com.jassikdan.recipeCourse.bo.RecipeCourseBO;
 import com.jassikdan.recipeCourse.model.RecipeCourse;
 
 @RestController
 public class RecipeCourseRestController {
 	
 	private FileManagerService fileManagerSerice = new FileManagerService();
+	@Autowired
+	private RecipeBO recipeBO;
+	@Autowired
+	private RecipeCourseBO recipeCourseBO;
 
 	//레시피 썸네일 세션에 저장
 	@PostMapping("/recipe/insert")
 	public Map<String, Object> recipeInsert(
 			@RequestParam("name") String name
 			, @RequestParam("description") String description
-			, @RequestParam("image") MultipartFile image
+			, @RequestParam(value="image", required=false) MultipartFile image
+			, @RequestParam("nation") String nation
 			, HttpServletRequest request){
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
@@ -41,8 +48,10 @@ public class RecipeCourseRestController {
 		//저장된 recipe를 세션에 저장해둔다.
 		
 		Recipe recipe = new Recipe();
+		recipe.setUserId(userId);
 		recipe.setName(name);
 		recipe.setDescription(description);
+		recipe.setNation(nation);
 		String filePath = "";
 		try {
 			filePath = fileManagerSerice.saveRecipe(userId, currentTimeMillis, image);
@@ -95,22 +104,24 @@ public class RecipeCourseRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "error");
-		
 		HttpSession session = request.getSession();
+		
 		//usedGenseratedKey
 		Recipe recipe = (Recipe) session.getAttribute("recipe");
+		recipeBO.insertRecipe(recipe);
 		//BO 불러서 recipe 저장 그리고 생성된 키도 불러온다.
-		int recipeId = 33888888;
-		
-		//사용된 재료 저장
+		int recipeId = recipe.getId();
 		
 		int i = 1;
-		while(session.getAttribute("cookingNo") != null) {
-			RecipeCourse recipeCourse = (RecipeCourse) session.getAttribute("cookingNo" + i);
+		while(session.getAttribute("cookingNo"+ i) != null) {
+			RecipeCourse recipeCourse = 
+					(RecipeCourse) session.getAttribute("cookingNo" + i);
+			recipeCourse.setRecipeId(recipeId);
+			recipeCourseBO.insertRecipeCourse(recipeCourse);
 			i++;
-			//BO로 불러서 저장!
 		}
 		
+		//TODO: 사용된 재료 저장
 		result.put("result", "success");
 		return result;
 	}

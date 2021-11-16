@@ -5,11 +5,19 @@
     
 <div class="mt-3 courseContent">
 	<input id="name" class="form-control" placeholder="음식 이름">
-	<div class="form-control mt-2 h-50"><!-- 사진 파일 등록 필수 요소 -->
-		<div class="h-75">
-			올려진 이미지를 보여주는 곳
-		</div>
-		<input id="image" type="file" class="mt-5">
+	<select id="nation" class="form-control mt-2">
+		<option value="">--Please choose nation--</option>
+		<option value="한식">한식</option>
+		<option value="중식">중식</option>
+		<option value="양식">양식</option>
+		<option value="일식">일식</option>
+		<option value="분식">분식</option>
+		<option value="퓨전">퓨전</option>
+		<option value="동남아시아">동남아시아</option>
+		<option value="기타">기타</option>
+	 </select>
+	<div class="form-control mt-2"><!-- 사진 파일 등록 필수 요소 -->
+		<input id="image" type="file" class="mt-2" class="form-control">
 	</div>
 	<input id="description" class="form-control mt-2" type="text" placeholder="음식 설명">
 	<!-- 재료등록 필요!!!! -->
@@ -22,6 +30,11 @@
 			var name = $('#name').val().trim();
 			if(name == ''){
 				alert('음식 이름을 입력해주세요');
+				return;
+			}
+			var nation = $('#nation').val();
+			if(nation == ''){
+				alert('음식의 분류가 선택되지 않았습니다.');
 				return;
 			}
 			var description = $('#description').val().trim();
@@ -46,6 +59,7 @@
 			let formData = new FormData();
 			formData.append('name', name);
 			formData.append('description', description);
+			formData.append('nation', nation);
 			formData.append('image', $('#image')[0].files[0]);
 			
 			alert(formData);
