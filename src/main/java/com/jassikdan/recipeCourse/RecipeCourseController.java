@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jassikdan.ingrdIhave.bo.IngrdIhaveBO;
 import com.jassikdan.ingrdIhave.model.IngrdIhave;
+import com.jassikdan.recipe.bo.RecipeBO;
 import com.jassikdan.recipe.model.Recipe;
 import com.jassikdan.recipeCourse.bo.RecipeCourseBO;
 import com.jassikdan.recipeCourse.model.RecipeCourse;
@@ -25,6 +26,8 @@ import com.jassikdan.recipeIngrd.model.RecipeIngrd;
 public class RecipeCourseController {
 	//다른 controller로 이동해야 할 것 같다. 
 	
+	@Autowired
+	private RecipeBO recipeBO;
 	@Autowired
 	private RecipeCourseBO recipeCourseBO;
 	@Autowired
@@ -143,6 +146,29 @@ public class RecipeCourseController {
 		}
 		
 		model.addAttribute("recipe", recipe);
+		model.addAttribute("recipeCourseList", recipeCourseList);
+		model.addAttribute("viewName", "recipe/insert_confirm");
+		
+		return "template/layout";
+	}
+	
+	
+	@RequestMapping("/recipe/insert_confirm_view_2")
+	public String recipeInsertConfirm2(
+			Model model
+			, HttpServletRequest request
+			) {
+		HttpSession session = request.getSession();
+		Integer userId = (Integer) session.getAttribute("userId");
+		if(userId == null) {
+			return "redirect:/user/sign_in_view";
+		}
+		int recipeId = 5007;
+//		Recipe recipe = recipeBO.getRecipeById(recipeId);
+		
+		//레시피 과정 세션에서 받아오기
+		List<RecipeCourse> recipeCourseList = recipeCourseBO.getRecipeCourseByRecipeId(recipeId);
+		
 		model.addAttribute("recipeCourseList", recipeCourseList);
 		model.addAttribute("viewName", "recipe/insert_confirm");
 		

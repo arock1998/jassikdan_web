@@ -38,7 +38,6 @@
 	<a class="deleteBtn" href="#">삭제하기</a>
 </div>
 
-
 <script>
 	$(document).ready(function(){
 	//ingrdIconLayter창 띄우기

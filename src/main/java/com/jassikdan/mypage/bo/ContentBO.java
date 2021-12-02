@@ -18,6 +18,8 @@ import com.jassikdan.recipe.model.Recipe;
 import com.jassikdan.recipeIngrd.bo.RecipeIngrdBO;
 import com.jassikdan.recipeIngrd.model.RecipeIngrd;
 import com.jassikdan.recipeLike.bo.RecipeLikeBO;
+import com.jassikdan.sharp.bo.SharpBO;
+import com.jassikdan.sharp.model.Sharp;
 
 @Service
 public class ContentBO {
@@ -33,6 +35,8 @@ public class ContentBO {
 	private RecipeLikeBO recipeLikeBO;
 	@Autowired
 	private RecipeIngrdBO recipeIngrdBO;
+	@Autowired
+	private SharpBO sharpBO;
 	
 	//재료 아이콘 생성하기
 	public List<IngrdIconView> generateIngrdIconViewListById(int userId){
@@ -80,7 +84,7 @@ public class ContentBO {
 
 	
 	//timeline에서 보여줄 ContentView
-	public List<ContentView> generateAllContentView(int userId, List<String> searchSharpList) {
+	public List<ContentView> generateAllContentView(int userId) {
 		List<ContentView> contentList = new ArrayList<>();
 		List<Recipe> recipeList = recipeBO.getAllRecipe();
 
@@ -92,24 +96,24 @@ public class ContentBO {
 			content.setRecipe(recipe);
 			content.setLikeYn(recipeLikeBO.isUserLikedRecipe(userId, recipeId));
 			content.setCountLike(recipeLikeBO.countRecipeLike(recipeId));
-			List<String> sharpList = new ArrayList<>();
+			List<String> recipeSharpList = new ArrayList<>();
 
 			// 데이터 상으로는 한식, 중국, 일본, 이탈리아, 서양, 퓨전, 동남아시아로 나뉘어져 있다.
 			String nation = recipe.getNation();
-			sharpList.add(nation);
+			recipeSharpList.add(nation);
 			for(RecipeIngrd item :recipeIngrdBO.getRecipeIngrdById(recipeId)) {
-				sharpList.add(item.getIngrdName());
+				recipeSharpList.add(item.getIngrdName());
 			}
-			content.setSharp(sharpList);
+			content.setSharp(recipeSharpList);
+			
+			List <Sharp> searchSharpList = sharpBO.getSharpListByUserId(userId);
 
 			// 관련있는 것에 점수 부여
-			for (String sharpStr : sharpList) {
+			for (String sharpStr : recipeSharpList) {
 				if(sharpStr != "") {
-					for (String searchSharp : searchSharpList) {
-						if(searchSharp != "") {
-							if (sharpStr.contains(searchSharp) || searchSharp.contains(sharpStr)) {
-								recipeScore += 1;
-							}
+					for (Sharp searchSharp : searchSharpList) {
+						if (sharpStr.contains(searchSharp.getKeyword()) || searchSharp.getKeyword().contains(sharpStr)) {
+							recipeScore += 1;
 						}
 					}
 				}

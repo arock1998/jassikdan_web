@@ -2,11 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jassikdan.test.dao.TestDAO">
-	<select resultType="com.jassikdan.test.model.Test" id="selectData">
-		SELECT
-			*
-		FROM
-			`test`;
+<mapper namespace="com.jassikdan.sharp.dao.SharpDAO">
+	<!-- userId로 샾 키워드 가져오기 -->
+	<select id="selectSharpListByUserId" resultType="com.jassikdan.sharp.model.Sharp" >
+		SELECT 
+			`id`
+			, `keyword`
+			, `userId`
+			, `createdAt`
+		FROM 
+			`sharp`
 	</select>
+	
+	<!-- 샾 키워드 등록하기 -->
+	<insert id="insertSharp" parameterType="map">
+		INSERT INTO 
+			`sharp`
+		(
+			`keyword`
+			, `userId`
+			, `createdAt`
+		)
+		VALUE
+		(
+			#{keyword}
+			, #{userId}
+			, NOW()
+		)
+	</insert>
+	
 </mapper>

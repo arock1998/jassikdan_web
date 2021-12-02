@@ -1,36 +1,87 @@
 @charset "UTF-8";
-.container {
-	width: 800px;
+
+
+body {
+	margin: 0;
+	
 }
+
+.bg-green{
+	background-color:#C5C9A4;
+}
+
+/*main*/
+#main > .header {
+	height:75px;
+	opacity: 0.5;
+}
+#main > .header > .nav{
+	width:550px;
+}
+#main > .contents{
+	height:530px;
+}
+#main > .contents2{
+	height:473px;
+}
+#main > .contents2 .text-box {
+	height:120px;
+}
+#main .contents2 .text-box {
+	color: #002919;
+	font-size: 17px;
+}
+
+#main .circle-box{
+	width:860px;
+}
+#main .circle {
+	width:138px;
+	height:138px;
+	margin-bottom: 30px;
+	border-radius: 50%;
+	background-color:#A3A37F;
+	box-shadow: 3px 3px 3px gray;
+}
+
+
+
+.container {
+	width: 1200px;
+}
+
 #header {
 	height: 90px;
 }
 
 /*로그인, 회원가입 화면*/
 .refrigeratorDoor {
-	background-color : rgb(44, 62, 80);
-	width : 350px;
+	background-color: rgb(44, 62, 80);
+	width: 350px;
 	height: 600px;
 }
-.refrigeratorDoor > a {
+
+.refrigeratorDoor>a {
 	display: inline-block;
-	height : 90px;
-	width : 100px;
+	height: 100px;
+	width: 100px;
 }
 /*로그인 화면*/
 .refrigeratorDoor .loginInputText {
-	height : 40px;
+	height: 40px;
 }
 
 /*냉장고 화면*/
 .ingrdIcon {
-	width : 60px;
-	height : 100px;
+	width: 60px;
+	height: 100px;
 }
-.ingrdIcon > img {
-	width : 50px;
-	height : 70px;
+
+.ingrdIcon>img {
+	width: 50px;
+	height: 70px;
 }
+
 .popupLayer {
 	position: absolute;
 	display: none;
@@ -39,16 +90,17 @@
 	width: 100px;
 	padding: 10px;
 }
+
 .popupLayer div {
 	position: absolute;
 	top: 5px;
 	right: 5px
 }
-.closeLayer {
-	cursor:pointer;
-	font-size:1.5em;
-}
 
+.closeLayer {
+	cursor: pointer;
+	font-size: 1.5em;
+}
 
 /*요리과정 detail*/
 
@@ -66,22 +118,17 @@
 	width : 600px;
 	margin : auto;
 /* } */
-.courseBox > input {
-	width : 600px;
-} 
-.arrowBox{
-	width : 100px;
-	width : 150px;	
+.courseBox>input {
+	width: 600px;
 }
+
+.arrowBox {
+	width: 100px;
+	width: 150px;
+}
+
 .courseModalBtn {
-	height : 80px;
+	height: 80px;
 }
 
 /*요리등록화면*/
-
-
-
-
-
-
-

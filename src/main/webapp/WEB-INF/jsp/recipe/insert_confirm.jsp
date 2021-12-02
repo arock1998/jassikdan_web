@@ -4,18 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!-- 레시피 썸네일 -->
 <div class="mt-3 border">
-	<h4>썸네일 화면</h4>
-	<div id="name" class="form-control"></div>
-	<div class="form-control mt-2 ">
-		<img id="image" src="${recipe.image}">
-	</div>
-	<div id="description" class="form-control mt-2">${recipe.description}</div>
+	<h4>조리과정</h4>
+	
 </div>
 <!-- 레시피 조리 과정 -->
 <c:forEach items="${recipeCourseList}" var="recipeCourse">
 <div class="mt-3 border">
 	<div class="form-control mt-2 ">
-		<img class="h-75" src="${recipeCourse.image }" >
+		<img class="h-75" src="${recipeCourse.image }" width="500px">
 	</div>
 	<div id="description" class="form-control mt-2">${recipeCourse.description}</div>
 </div>
