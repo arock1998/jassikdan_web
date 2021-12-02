@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jassikdan.mypage.bo.ContentBO;
+import com.jassikdan.sharp.bo.SharpBO;
 
 @Controller
 public class TimelineController {
 	
 	@Autowired
 	private ContentBO contentBO;
+	@Autowired
+	private SharpBO sharpBO;
 	
 	// formData를 보내거나 완전히 방법을 바꾸거나 해야 될 것 같다.
 	@RequestMapping("/timeline/timeline")
@@ -46,9 +49,9 @@ public class TimelineController {
 		sharpList.addAll(sharpList);
 		
 		//view에서 가지고 온 sharpList를 다시 view로 전달해준다.
-		model.addAttribute("sharpList", sharpList);
+		model.addAttribute("sharpList", sharpBO.getSharpListByUserId(userId) );
 		
-		model.addAttribute("contentList", contentBO.generateAllContentView(userId, sharpList));
+		model.addAttribute("contentList", contentBO.generateAllContentView(userId));
 		model.addAttribute("viewName", "timeline/timeline");
 		return "template/layout";
 	}

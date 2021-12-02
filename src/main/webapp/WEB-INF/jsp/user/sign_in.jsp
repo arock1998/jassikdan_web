@@ -19,7 +19,7 @@
 	</div>
 	<!-- 냉장실 -->
 	<div class="refrigeratorDoor rounded d-flex align-items-center"> 
-		<a id="signUpBtn" href="/user/sign_up_view" class="btn btn-light w-100 col-2 ml-2 align-self-center">회<br>원<br>가<br>입</a>
+		<a id="signUpBtn" href="/user/sign_up_view" class="btn btn-light w-100 col-2 ml-2 align-self-center ">회<br>원<br>가<br>입</a>
 	</div>
 </div>
 

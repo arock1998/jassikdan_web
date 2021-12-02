@@ -53,6 +53,7 @@
 			var loginId = $('input[name=loginId]').val().trim();
 			if(loginId.length < 4){
 				alert('아이디는 4자 이상 입력되야 합니다.');
+				return;
 			}
 			$.ajax({
 				type:'post'
@@ -72,8 +73,8 @@
 				, error : function(e){
 					alert('통신에 실패했습니다.' + e);
 				}
-			}) 
-		})
+			});
+		});
 		//회원가입 버튼
 		$('#signUpBtn').on('click', function(e){
 			e.preventDefault();			
