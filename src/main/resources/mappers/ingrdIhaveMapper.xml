@@ -20,24 +20,22 @@
 	</select>
 	
 	<!-- 구입한 재료 등록하기 -->
-	<insert id="insertIngrdIhaveList" parameterType="java.util.List">
+	<insert id="insertIngrdIhave" parameterType="map">
 		INSERT INTO
 			`ingrd_ihave`
 		(
 			`userId`
 			, `ingrdId`
-			, `amount`
-			, `expirationDate`
+			, `createdAt`
+			, `updatedAt`
 		)
 		VALUES
-		<foreach collection="list" item="ingrd" separator=",">
 		( 
-			#{ingrd.userId}
-			, #{ingrd.ingrdId}
-			, #{ingrd.amount}
-			, #{ingrd.date}
+			#{userId}
+			, #{ingrdId}
+			, NOW()
+			, NOW()
 		)
-		</foreach>
 	</insert>
 	
 	<!-- 구입한 재료 삭제 -->

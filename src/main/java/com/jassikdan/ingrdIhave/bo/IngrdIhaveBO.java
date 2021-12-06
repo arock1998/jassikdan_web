@@ -21,10 +21,10 @@ public class IngrdIhaveBO {
 	public List<IngrdIhave> getIngrdIhaveByUserId(int userId){
 		return ingrdIhaveDAO.selectIngrdIhaveByUserId(userId);
 	}
-	
+
 	//구매한 재료 등록하기
-	public void insertIngrdIhaveList(List<HashMap<String,Object>> ingrdList) {
-		ingrdIhaveDAO.insertIngrdIhaveList(ingrdList);
+	public void insertIngrdIhave(int userId, int ingrdId) {
+		ingrdIhaveDAO.insertIngrdIhave(userId, ingrdId);
 	}
 	
 	//구매한 재료 삭제

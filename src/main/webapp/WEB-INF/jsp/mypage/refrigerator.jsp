@@ -104,6 +104,8 @@
 	function closeLayer( obj ) {
 		$(obj).parent().parent().hide();
 	}
+	
+	//Drag and Drop
  	function allowDrop(e){
  		e.preventDefault();
  	}
@@ -113,9 +115,27 @@
  	function drop(e){
  		e.preventDefault();
  		var data = e.dataTransfer.getData("text");
- 		e.target.appendChild(document.getElementById(data)); 	
+ 		e.target.appendChild(document.getElementById(data));
  	}
-
+ 	
+ 	function insertIngrdIhave(ingrdId){
+ 		alert(ingrdId);
+ 		$.ajax({
+ 			type:'post'
+ 			, url: '/ingrd_ihave/insert'
+ 			, data: {'ingrdId': ingrdId }
+ 			, success : function(data){
+ 				if(data.result="success"){
+ 					location.reload();
+ 				} else {
+ 					alert('실패 다시 시도해주세요');
+ 				}
+ 			}
+ 			, error : function(e){
+ 				alert('관리자에게 문의해주세요' + e);
+ 			}
+ 		});
+ 	}
 </script>
 
 

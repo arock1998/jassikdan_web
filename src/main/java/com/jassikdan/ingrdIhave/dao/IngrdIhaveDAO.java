@@ -1,7 +1,6 @@
 package com.jassikdan.ingrdIhave.dao;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +15,9 @@ public interface IngrdIhaveDAO {
 	public List<IngrdIhave> selectIngrdIhaveByUserId(int userId);
 	
 	//구매한 재료 등록하기
-	public void insertIngrdIhaveList(List<HashMap<String,Object>> ingrdList);
+	public void insertIngrdIhave(
+			@Param("userId") int userId
+			, @Param("ingrdId") int ingrdId);
 		
 	//구매한 재료 삭제
 	public void deleteIngrdIhaveById(

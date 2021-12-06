@@ -112,23 +112,16 @@ body {
 	width: 60px;
 	height: 60px;
 }
-
 .refrigeratorDoor {
 	background-color: rgb(44, 62, 80);
 	width: 350px;
 	height: 600px;
 }
-
 .refrigeratorDoor>a {
 	display: inline-block;
 	height: 100px;
 	width: 100px;
 }
-
-
-
-
-
 
 
 .popupLayer {
