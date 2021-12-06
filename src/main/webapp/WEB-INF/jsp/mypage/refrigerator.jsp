@@ -31,7 +31,8 @@
 		<!-- 냉동실 -->
 		<div id="layer1" class="refrigeratorDoor d-flex flex-wrap rounded mr-5" ondrop="drop(event)" ondragover="allowDrop(event)"> 
 		<c:forEach items="${ingrdIhaveList}" var="ingrd">
-			<div id="${ingrd.id }" class="card cursor ingrdIcon m-1 text-center" data-ingrd-id="${ingrd.id}" oncontextmenu='return false'> <!-- ingrd_ihave의 아이디를 가진다.(primaryKey) , oncontextmenu 우측마우스 기본동작 없애기	 -->
+			<div id="${ingrd.id }" class="card cursor ingrdIcon ingrdIhave m-1 text-center pointer" 
+			 data-toggle="modal" data-target="#my_modal" data-ingrd-id="${ingrd.id}" data-ingrd-name="${ingrd.name}" data-ingrd-amount="${ingrd.amount}" data-ingrd-expdate> <!-- ingrd_ihave의 아이디를 가진다.(primaryKey) , oncontextmenu 우측마우스 기본동작 없애기	 -->
 				<!-- 재료 영어이름의 띄어쓰기는 '_'로 등록되어있다. -->
 				<img class="border" src="/static/images/ingrd/${ingrd.nameEng}.png" alt="">
 				<small>${ingrd.name} <br>
@@ -49,14 +50,35 @@
 	</div>
 </div>
 
-<style>
-#div1 {
-  width: 350px;
-  height: 70px;
-  padding: 10px;
-  border: 1px solid #aaaaaa;
-}
-</style>
+<!-- Modal -->
+<div class="modal fade" id="my_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	      <input type="hidden" id="modalIngrdId" />
+	      <div id="modalIngrdName"></div>
+	      <div class="my-2">
+		      <small>남은량</small>
+		      <input type="text" id="modalIngrdAmount" class="form-control"/>
+	      </div>
+	      <div>
+		      <small>유통기한</small>
+		      <input type="text" id="modalIngrdExpdate" class="form-control"/>
+	      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- 재료 아이콘 우측 클릭시 나타나는 레이어 창 -->
 <div class="popupLayer">
@@ -82,6 +104,22 @@
 			}).show();
 		}
 	}); 
+	
+ 	//triggered when modal is about to be shown
+	$('.ingrdIhave').on('click', function(e){
+		var ingrdId = $(this).data('ingrd-id');
+		var ingrdName = $(this).data('ingrd-name');
+		var ingrdAmount = $(this).data('ingrd-amount');
+		var ingrdExpdate = $(this).data('ingrd-expdate');
+		
+		$('.modal-body #modalIngrdId').val(ingrdId);
+		$('.modal-body #modalIngrdName').text(ingrdName);
+		$('.modal-body #modalIngrdAmount').val(ingrdAmount);
+		//TODO: 구매날짜로 변경해야함 //등록안되어있는 값이 많다.
+		$('.modal-body #modalIngrdExpdate').val(ingrdExpdate);
+	});
+	
+	
 	//가지고 있는 재료 삭제
 	$('.deleteBtn').on('click', function(){
 		var ingrdId = $(this).parent().data('ingrd-id');
@@ -117,7 +155,6 @@
  		var data = e.dataTransfer.getData("text");
  		e.target.appendChild(document.getElementById(data));
  	}
- 	
  	function insertIngrdIhave(ingrdId){
  		alert(ingrdId);
  		$.ajax({
@@ -137,6 +174,4 @@
  		});
  	}
 </script>
-
-
     
