@@ -38,11 +38,11 @@
 <body>
 	<div class="container">
 	<!-- 헤더 -->
-		<header id="header" class=" bg-light text-center">
+		<header>
 			<jsp:include page="../include/gnb.jsp"></jsp:include>
 		</header>
 	<!-- 컨텐츠 -->
-		<section class="contents">
+		<section>
 			<jsp:include page="../${viewName}.jsp"></jsp:include>
 		</section>
 	<!-- footer -->

@@ -1,58 +1,102 @@
 @charset "UTF-8";
-
-
 body {
 	margin: 0;
-	
 }
-
 .bg-green{
 	background-color:#C5C9A4;
 }
-
-/*main*/
-#main > .header {
-	height:75px;
-	opacity: 0.5;
+.pointer{
+	cursor:pointer;
 }
-#main > .header > .nav{
+
+/*### 헤더 ###*/
+#header{
+	height:75px;
+}
+.opacity {
+	height:75px;
+	background: rgba(197, 201, 164, 0.5);
+}
+.nav{
 	width:550px;
 }
-#main > .contents{
-	height:530px;
+.bg-img{
+	height:605px;
+	background-image: URL(/static/images/main/salad.jpg) 
 }
-#main > .contents2{
+
+.pop-layer-user { 
+	display : none;
+	position : absolute;
+	width : 120px;
+	background-color:#fff;
+    top: 100%;
+    left: 50%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 2px;
+    border-radius: 6px;
+    border: 1px solid;
+}
+
+
+
+
+/*### 로그인 페이지 ###*/
+#loginBox {
+	margin: 50px auto;
+	height:400px;
+	width:500px;
+}
+
+
+
+
+
+
+
+
+/*메인페이지*/
+.contents{
 	height:473px;
 }
-#main > .contents2 .text-box {
+.contents .text-box {
 	height:120px;
 }
-#main .contents2 .text-box {
+.contents .text-box {
 	color: #002919;
 	font-size: 17px;
 }
 
-#main .circle-box{
+.circle-box{
 	width:860px;
 }
-#main .circle {
+.circle {
 	width:138px;
 	height:138px;
+	background-color:#C5C9A4;
 	margin-bottom: 30px;
 	border-radius: 50%;
-	background-color:#A3A37F;
-	box-shadow: 3px 3px 3px gray;
+	box-shadow: 1px 1px 1px gray;
 }
-
-
 
 .container {
 	width: 1200px;
 }
 
-#header {
-	height: 90px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*로그인, 회원가입 화면*/
 .refrigeratorDoor {
