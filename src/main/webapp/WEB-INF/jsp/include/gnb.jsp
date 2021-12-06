@@ -32,24 +32,21 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-
 </div>
-
-
 <!-- pop layer user -->
 <div id="popLayerUser" class="pop-layer-user">
 	<div class="pop-container">
 		<div class="pop-conts">
-			<a href="/user/sign_out" class="font-weight-bold ml-3">로그아웃</a>
-			
-            <div>
-                <a href="#" class="btn-layerClose">Close</a>
+		   <div>
+                <a href="#" class="btn-layerClose small float-right mr-2 mb-2 text-dark ">X</a>
             </div>
+            <div>
+				<a href="/user/sign_out" class=" mx-3 mt-3 font-size-16 text-dark">Sign Out</a>
+			</div>
+         
 		</div>
 	</div>
 </div>
-
-
 <script>
 	$(document).ready(function(){
 	 	$('#main').on('click', function(){
@@ -66,29 +63,35 @@
 	 	});
 	});
 	
-	function layer_popup(el){
-		var $el = $(el);	//레이어의 id를 $el 변수에 저장
-        $el.fadeIn();
+	function layer_popup(popLayerId){
+		var $layer = $(popLayerId);	//레이어의 id를 $el 변수에 저장
+		$layer.fadeIn();
         
-	      var $elWidth = ~~($el.outerWidth()),
-          $elHeight = ~~($el.outerHeight()),
+	      var $elWidth = ~~($layer.outerWidth()),
+          $elHeight = ~~($layer.outerHeight()),
           docWidth = $(document).width(),
           docHeight = $(document).height();
 
 	      // 화면의 중앙에 레이어를 띄운다. --> 바꾸자 클릭한 위치에서 드롭다운으로 떨어지도록
 	      if ($elHeight < docHeight || $elWidth < docWidth) {
-	          $el.css({
-	              marginTop: -$elHeight /2,
-	              marginLeft: -$elWidth/2
+	    	  $layer.css({
+	              top: '45px', 
+	              left: '1117px'
 	          })
 	      } else {
-	          $el.css({top: 0, left: 0});
+	    	  $layer.css({top: 0, left: 0});
 	      }
 	      
-	      $el.find('a.btn-layerClose').click(function(){
-	           $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+	      $layer.find('a.btn-layerClose').click(function(){
+	    	  $layer.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
 	            return false;
 	        });
+	      
+	      $(document).mouseup(function (e){
+	    	  if($layer.has(e.target).length === 0){
+	    		  $layer.fadeOut();
+	    	  }
+	    	});
 	}
 	
 </script>
