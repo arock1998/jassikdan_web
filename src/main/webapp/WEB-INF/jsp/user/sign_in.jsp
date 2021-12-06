@@ -9,7 +9,24 @@
 		<input id="password" class="form-control mb-2" type="password" placeholder="password">
 		<button id="submit" class="form-control" type="submit">로그인</button>
 	</form>
+	<div class="d-flex w-100 justify-content-center mt-3">
+		<div>
+			<a href="#" class="text-secondary small ml-2">ID/PW 찾기</a></div>
+		<div>
+			<span class="text-secondary small ml-2">|</span>
+		</div>
+		<div>
+			<a href="/user/sign_up_view" class="text-secondary small ml-2">회원가입</a></div>
+		</div>
+		
+		<a href="naver.com">네이버</a>
+		<a href="naver.com">구글</a>
+		<a href="naver.com">카카오</a>
+		<a href="naver.com">페이스북</a>
+		
+		
 	</div>
+
 </div>
 
 <script>

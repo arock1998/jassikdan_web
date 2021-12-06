@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,12 +55,35 @@
 					<div class="small mx-2">STORY</div>
 				</div>
 			<!-- 로그인 -->
-				<div id="sign_in" class="d-flex justify-content-around align-items-center pointer">
-					<img src="/static/images/icon/user.png" class="mr-1" alt="login" class="" width="16px">
-					<div class="small">LOGIN</div>
-				</div>
+				<c:choose>
+					<c:when test="${userId eq null}">
+						<div id="sign_in" class="d-flex justify-content-around align-items-center pointer">
+							<img src="/static/images/icon/user.png" class="mr-1" alt="login" class="" width="16px">
+							<div class="small">LOGIN</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="userToggle" class="d-flex justify-content-around align-items-center pointer">
+							<img src="/static/images/icon/user.png" class="mr-1" alt="login" class="" width="16px">
+							<div class="small">${loginId}</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
+		<!-- pop layer user -->
+			<div id="popLayerUser" class="pop-layer-user">
+				<div class="pop-container">
+					<div class="pop-conts">
+					   <div>
+			                <a href="#" class="btn-layerClose small float-right mr-2 mb-2 text-dark ">X</a>
+			            </div>
+			            <div>
+							<a href="/user/sign_out" class=" mx-3 mt-3 font-size-16 text-dark">Sign Out</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		<!-- ### contents ### -->
 		<div class="contents d-flex justify-content-center">
 			<div>
@@ -93,8 +117,42 @@
 		$('#sign_in').on('click', function(){
 			location.href="/user/sign_in_view";
 		});
+	 	//로그인 되어있는 경우
+	 	$('#userToggle').on('click', function(){
+	 		var popLayerId = '#popLayerUser';
+	        layer_popup(popLayerId);
+	 	});
 	});
-	</script>
-	
+	 	
+ 	function layer_popup(popLayerId){
+		var $layer = $(popLayerId);	//레이어의 id를 $el 변수에 저장
+		$layer.fadeIn();
+        
+      var $elWidth = ~~($layer.outerWidth()),
+         $elHeight = ~~($layer.outerHeight()),
+         docWidth = $(document).width(),
+         docHeight = $(document).height();
+	      // 화면의 중앙에 레이어를 띄운다. --> 바꾸자 클릭한 위치에서 드롭다운으로 떨어지도록
+      if ($elHeight < docHeight || $elWidth < docWidth) {
+    	  $layer.css({
+              top: '45px', 
+              left: '1117px'
+          })
+      } else {
+    	  $layer.css({top: 0, left: 0});
+      }
+      
+      $layer.find('a.btn-layerClose').click(function(){
+    	  $layer.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+            return false;
+        });
+      
+      $(document).mouseup(function (e){
+    	  if($layer.has(e.target).length === 0){
+    		  $layer.fadeOut();
+    	  }
+    	});
+	}
+</script>
 </body>
 </html>

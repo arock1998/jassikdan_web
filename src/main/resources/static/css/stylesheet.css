@@ -1,4 +1,6 @@
 @charset "UTF-8";
+
+/*### 공통 ###*/
 body {
 	margin: 0;
 }
@@ -8,6 +10,10 @@ body {
 .pointer{
 	cursor:pointer;
 }
+.font-size-16{
+	font-size: 14px;
+}
+
 
 /*### 헤더 ###*/
 #header{
@@ -24,7 +30,6 @@ body {
 	height:605px;
 	background-image: URL(/static/images/main/salad.jpg) 
 }
-
 .pop-layer-user { 
 	display : none;
 	position : absolute;
@@ -36,27 +41,11 @@ body {
     padding-bottom: 4px;
     margin-top: 2px;
     border-radius: 6px;
-    border: 1px solid;
+    border: 1px solid #999;
 }
 
 
-
-
-/*### 로그인 페이지 ###*/
-#loginBox {
-	margin: 50px auto;
-	height:400px;
-	width:500px;
-}
-
-
-
-
-
-
-
-
-/*메인페이지*/
+/*### 메인페이지 ###*/
 .contents{
 	height:473px;
 }
@@ -67,7 +56,6 @@ body {
 	color: #002919;
 	font-size: 17px;
 }
-
 .circle-box{
 	width:860px;
 }
@@ -79,13 +67,20 @@ body {
 	border-radius: 50%;
 	box-shadow: 1px 1px 1px gray;
 }
-
 .container {
 	width: 1200px;
 }
 
 
-
+/*### 로그인 페이지 ###*/
+#loginBox {
+	margin: 50px auto;
+	height:400px;
+	width:500px;
+	border: 1px solid #999;
+	border-radius: 10%;
+	box-shadow: 1px 1px 1px gray;
+}
 
 
 
