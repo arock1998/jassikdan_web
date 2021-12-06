@@ -34,25 +34,34 @@
 <!-- stylesheet -->
 <link rel="stylesheet" type="text/css" href="/static/css/stylesheet.css">
 
-
 </head>
 <body>
-	<div id="main" class="container">
+	<div id="" class="container">
 	<!--### header ###-->
-		<div class="bg-secondary header d-flex justify-content-around align-items-center text-white">
-			<div><img alt="">MENU</div>
-			<div class="nav d-flex justify-content-around align-items-center">
-				<div>BRAND</div>
-				<div>LEARN</div>
-				<div><h4>JASSiKDAN</h4></div>
-				<div>SHOP</div>
-				<div>STORY</div>
+		<div class="bg-img">
+			<div class="bg-green opacity d-flex justify-content-around align-items-center text-white">
+			<!-- 메뉴토글 -->
+				<div class="d-flex justify-content-around align-items-center">
+					<img src="/static/images/icon/menu.png" class="mr-1" alt="menu" class="w-100 h-100" width="12px">
+					<div class="small">MENU</div>
+				</div>
+			<!-- 중앙 메뉴 -->
+				<div class="nav d-flex justify-content-center align-items-center">
+					<div class="small mx-2">BRAND</div>
+					<div class="small mx-2">LEARN</div>
+					<div id="main" class="mx-2 pointer"><h4>JASSiKDAN</h4></div>
+					<div class="small mx-2">SHOP</div>
+					<div class="small mx-2">STORY</div>
+				</div>
+			<!-- 로그인 -->
+				<div id="sign_in" class="d-flex justify-content-around align-items-center pointer">
+					<img src="/static/images/icon/user.png" class="mr-1" alt="login" class="" width="16px">
+					<div class="small">LOGIN</div>
+				</div>
 			</div>
-			<div>login</div>
 		</div>
-		<!--### contents ###-->
-		<div class="contents bg-success"></div>
-		<div class="contents2 bg-green d-flex justify-content-center">
+		<!-- ### contents ### -->
+		<div class="contents d-flex justify-content-center">
 			<div>
 				<div class="text-center text-box p-3">
 					<br><b>INGREDIENT LIST</b><br>
@@ -74,11 +83,18 @@
 				</div>
 			</div>
 		</div>
-		<footer class="my-5"></footer>
 	</div>
+	
+	<script>
+	$(document).ready(function(){
+		$('#main').on('click', function(){
+			location.href="/main";
+		});
+		$('#sign_in').on('click', function(){
+			location.href="/user/sign_in_view";
+		});
+	});
+	</script>
 	
 </body>
 </html>
-
-
-
