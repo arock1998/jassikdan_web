@@ -39,7 +39,7 @@ public class ContentBO {
 	private SharpBO sharpBO;
 	
 	//재료 아이콘 생성하기
-	public List<IngrdIconView> generateIngrdIconViewListById(int userId){
+	public List<IngrdIconView> generateIngrdIhaveIconViewListById(int userId){
 		List<IngrdIconView> ingrdList = new ArrayList<>();
 		List<IngrdIhave> ingrdIhaveList = ingrdIhaveBO.getIngrdIhaveByUserId(userId);
 		

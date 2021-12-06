@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jassikdan.ingrd.bo.IngrdBO;
 import com.jassikdan.ingrd.model.Ingrd;
 import com.jassikdan.mypage.bo.ContentBO;
 import com.jassikdan.mypage.model.ContentView;
@@ -20,7 +21,9 @@ public class MypageController {
 
 	@Autowired
 	private ContentBO contentBO;
-	
+	@Autowired
+	private IngrdBO ingrdBO;
+
 	/**
 	 * 냉장고 화면
 	 * @param model
@@ -35,9 +38,14 @@ public class MypageController {
 		if(userId == null ) {
 			return "redirect:/user/sign_in_view";
 		}
-		//재료 아이콘 리스트 가져오기
-		List<IngrdIconView> ingrdList = contentBO.generateIngrdIconViewListById(userId);
+		
+		//전체 재료 리스트 가져오기
+		List<Ingrd> ingrdList = ingrdBO.getIngrdAll();
 		model.addAttribute("ingrdList", ingrdList);
+		
+		//user의 재료 리스트 가져오기
+		List<IngrdIconView> ingrdIhaveList = contentBO.generateIngrdIhaveIconViewListById(userId);
+		model.addAttribute("ingrdIhaveList", ingrdIhaveList);
 		
 		model.addAttribute("viewName", "mypage/refrigerator");
 		return "template/layout";

@@ -78,6 +78,9 @@
 					   <div>
 			                <a href="#" class="btn-layerClose small float-right mr-2 mb-2 text-dark ">X</a>
 			            </div>
+						<div>
+           					<a href="/mypage/refrigerator_view" class=" mx-3 mt-3 font-size-16 text-dark">My page</a>
+           				</div>
 			            <div>
 							<a href="/user/sign_out" class=" mx-3 mt-3 font-size-16 text-dark">Sign Out</a>
 						</div>

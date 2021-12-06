@@ -82,18 +82,37 @@ body {
 	box-shadow: 1px 1px 1px gray;
 }
 
+/*### 회원가입 페이지 ###*/
+#signUpBox{
+	margin: 10px auto;
+	width:500px;
+	border: 1px solid #999;
+	border-radius: 10%;
+	box-shadow: 1px 1px 1px gray;
+}
 
 
+/*### 냉장고 화면 페이지 ###*/
+.ingrdSelectBox > .ingrdIconBox{
+	width:800px;
+	height:200px;
+  	overflow-x: scroll;
+}
+.ingrdIcon {
+	width: 60px;
+	height: 90px;
+	border: 1px solid #999;
+	border-radius: 10%;
+	box-shadow: 1px 1px 1px gray;
+	margin:5px;
+	background-color : white;
+	text-align : center;
+}
+.ingrdIcon> img {
+	width: 60px;
+	height: 60px;
+}
 
-
-
-
-
-
-
-
-
-/*로그인, 회원가입 화면*/
 .refrigeratorDoor {
 	background-color: rgb(44, 62, 80);
 	width: 350px;
@@ -105,21 +124,12 @@ body {
 	height: 100px;
 	width: 100px;
 }
-/*로그인 화면*/
-.refrigeratorDoor .loginInputText {
-	height: 40px;
-}
 
-/*냉장고 화면*/
-.ingrdIcon {
-	width: 60px;
-	height: 100px;
-}
 
-.ingrdIcon>img {
-	width: 50px;
-	height: 70px;
-}
+
+
+
+
 
 .popupLayer {
 	position: absolute;
