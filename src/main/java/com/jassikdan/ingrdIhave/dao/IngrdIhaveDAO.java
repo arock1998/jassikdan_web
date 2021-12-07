@@ -19,6 +19,12 @@ public interface IngrdIhaveDAO {
 			@Param("userId") int userId
 			, @Param("ingrdId") int ingrdId);
 		
+	//가지고 있는 재료 정보 수정
+	public void updateIngrdIhave(
+			@Param("ingrdIhaveId") int ingrdIhaveId
+			, @Param("ingrdAmount") String ingrdAmount
+			, @Param("ingrdExpdate") String ingrdExpdate);
+	
 	//구매한 재료 삭제
 	public void deleteIngrdIhaveById(
 			@Param("userId") int userId

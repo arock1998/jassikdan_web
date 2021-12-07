@@ -27,6 +27,11 @@ public class IngrdIhaveBO {
 		ingrdIhaveDAO.insertIngrdIhave(userId, ingrdId);
 	}
 	
+	//가지고 있는 재료 수정
+	public void updateIngrdIhave(int ingrdIhaveId, String ingrdAmount, String ingrdExpdate) {
+		ingrdIhaveDAO.updateIngrdIhave(ingrdIhaveId, ingrdAmount, ingrdExpdate);
+	}
+	
 	//구매한 재료 삭제
 	public void deleteIngrdIhaveById(int userId, int id) {
 		ingrdIhaveDAO.deleteIngrdIhaveById(userId, id);

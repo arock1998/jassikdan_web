@@ -19,7 +19,6 @@ public class IngrdIhaveRestController {
 	@Autowired
 	private IngrdIhaveBO ingrdIhaveBO;
 
-
 	/**
 	 * 구매한 재료 등록하기
 	 * @param ingrdId
@@ -42,6 +41,21 @@ public class IngrdIhaveRestController {
 		return result;
 	}
 	
+	@RequestMapping("/ingrd_ihave/update")
+	public Map<String, Object> ingrdIhaveUpdate(
+			@RequestParam("ingrdIhaveId") int ingrdIhaveId
+			, @RequestParam("ingrdAmount") String ingrdAmount
+			, @RequestParam("ingrdExpdate") String ingrdExpdate
+			){
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "error");
+		ingrdIhaveBO.updateIngrdIhave(ingrdIhaveId, ingrdAmount, ingrdExpdate);
+		
+		result.put("result", "success");
+		return result;
+	}
+	
 	/**
 	 * 구매한 재료 삭제하기
 	 * @param id
@@ -50,7 +64,7 @@ public class IngrdIhaveRestController {
 	 */
 	@RequestMapping("/ingrd_ihave/delete")
 	public Map<String, Object> ingrdIhaveDelete(
-			@RequestParam("ingrdId")int id
+			@RequestParam("ingrdIhaveId") int id
 			, HttpServletRequest request){
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");

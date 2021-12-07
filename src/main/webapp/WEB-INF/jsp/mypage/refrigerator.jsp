@@ -24,6 +24,10 @@
 		</c:forEach>
 		</div>	
 	</div>
+	<!-- 휴지통 -->
+	<div>
+		
+	</div>
 
 <div class="d-flex mt-5">
 	<!-- 냉장고 -->
@@ -68,42 +72,19 @@
 	      </div>
 	      <div>
 		      <small>유통기한</small>
-		      <input type="text" id="modalIngrdExpdate" class="form-control"/>
+		      <input type="date" id="modalIngrdExpdate" class="form-control"/>
 	      </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-danger ingrdDelete" data-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-primary ingrdUpdate">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 
-
-<!-- 재료 아이콘 우측 클릭시 나타나는 레이어 창 -->
-<div class="popupLayer">
-	<div>
-		<span class="closeLayer" onClick="closeLayer(this)" title="닫기">X</span>
-	</div>
-	<a class="deleteBtn" href="#">삭제하기</a>
-</div>
-
 <script>
 	$(document).ready(function(){
-	//ingrdIconLayter창 띄우기
- 	$('.ingrdIcon').on('mousedown', function(e){
-		//우측 마우스 클릭으로 레이어창 띄우기
-		if ((event.button == 2) || (event.which == 3)) {
-			var ingrdId = $(this).data('ingrd-id');
-			$('.popupLayer').data('ingrd-id', ingrdId);
-			//클릭한 곳의 위치를 잡는다.
-			var pos = $(this).position(); 
-			$('.popupLayer').css({
-				"top": (pos.top) + 'px'
-				, "left": (pos.left) + 'px'
-			}).show();
-		}
-	}); 
 	
  	//triggered when modal is about to be shown
 	$('.ingrdIhave').on('click', function(e){
@@ -119,16 +100,16 @@
 		$('.modal-body #modalIngrdExpdate').val(ingrdExpdate);
 	});
 	
-	
-	//가지고 있는 재료 삭제
-	$('.deleteBtn').on('click', function(){
-		var ingrdId = $(this).parent().data('ingrd-id');
+ 	//재료 삭제
+	$('.ingrdDelete').on('click', function(e){
+		var ingrdIhaveId = $(this).parent().siblings('.modal-body').children('#modalIngrdId').val();
  		$.ajax({
-			type:'get'
-			, url : '/ingrd_ihave/delete?ingrdId=' + ingrdId
+			type:'post'
+			, url : '/ingrd_ihave/delete'
+			, data : {'ingrdIhaveId' : ingrdIhaveId }
 			, success : function(data){
 				if(data.result == 'success'){
-					alert('성공');
+					//alert('성공');
 					location.reload();
 				} else {
 					alert('삭제실패');
@@ -138,14 +119,35 @@
 			}
 		}) ;
 	});
-});
-	function closeLayer( obj ) {
-		$(obj).parent().parent().hide();
-	}
 	
-	//Drag and Drop
+	//재료 정보 수정
+	$('.ingrdUpdate').on('click', function(e){
+		var $modalBody = $(this).parent().siblings('.modal-body');
+		var ingrdIhaveId = $modalBody.children('#modalIngrdId').val();
+		var ingrdAmount = $modalBody.find('#modalIngrdAmount').val();
+		var ingrdExpdate = $modalBody.find('#modalIngrdExpdate').val();
+		
+ 		$.ajax({
+			type:'post'
+			, url : '/ingrd_ihave/update'
+			, data : {'ingrdIhaveId' : ingrdIhaveId, 'ingrdAmount': ingrdAmount, 'ingrdExpdate': ingrdExpdate }
+			, success : function(data){
+				if(data.result == 'success'){
+					//alert('성공');
+					location.reload();
+				} else {
+					alert('');
+				}
+			}, error : function(e){
+				alert('error' + e);
+			}
+		}) ; 
+	});
+});
+	//Drag and Drop// 
  	function allowDrop(e){
  		e.preventDefault();
+ 		e.dataTransfer.effectAllowed = 'copy';
  	}
  	function drag(e){
  		e.dataTransfer.setData("text", e.target.id);
@@ -154,9 +156,10 @@
  		e.preventDefault();
  		var data = e.dataTransfer.getData("text");
  		e.target.appendChild(document.getElementById(data));
+ 		e.dataTransfer.dropEffect = "copy"
+ 		insertIngrdIhave(data);
  	}
  	function insertIngrdIhave(ingrdId){
- 		alert(ingrdId);
  		$.ajax({
  			type:'post'
  			, url: '/ingrd_ihave/insert'

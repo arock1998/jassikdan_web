@@ -38,6 +38,17 @@
 		)
 	</insert>
 	
+	<!-- 가지고 있는 재료 정보 수정 -->
+	<update id="updateIngrdIhave" parameterType="map">
+		UPDATE 
+			`ingrd_ihave`
+		SET
+			`amount` = #{ingrdAmount} AND
+			`expirationDate` = #{ingrdExpdate}
+		WHERE 
+			`id` = #{ingrdIhaveId}
+	</update>
+	
 	<!-- 구입한 재료 삭제 -->
 	<delete id="deleteIngrdIhaveById" parameterType="map">
 		DELETE FROM
