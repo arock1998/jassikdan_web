@@ -46,10 +46,24 @@
             <div>
 				<a href="/user/sign_out" class=" mx-3 mt-3 font-size-16 text-dark">Sign Out</a>
 			</div>
-         
 		</div>
 	</div>
 </div>
+<!-- 상단 nav -->
+<nav id="topMenu">
+	<div class="d-flex justify-content-center h-100 w-100">
+		<div class="col-2 text-center pt-2">
+			<a href="/mypage/refrigerator_view" class="text-center p-3 text-white small" >냉장고 관리</a>
+		</div>
+		<div class="col-2 text-center pt-2">
+			<a href="#" class=" text-center p-3 text-white small" >레시피 올리기</a><!-- 이거 여기있는거 별로인것같다  -->
+		</div>
+		<div class="col-2 text-center pt-2">
+			<a href="/mypage/recipe_view" class=" text-center p-3 text-white small">레시피 보러가기</a>
+		</div>
+	</div>
+</nav>
+
 <script>
 	$(document).ready(function(){
 	 	$('#main').on('click', function(){

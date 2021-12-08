@@ -4,10 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!-- mypage 탭 -->
-<div class="d-flex">
-	<a href="#" class="bg-info w-50 text-center p-3" >냉장고 관리</a>
-	<a href="/mypage/recipe_view" class="bg-success w-50 text-center p-3">내가 올린 레시피</a>
-</div>
+
 <!-- 재료 검색 -->
 	<div class="ingrdSelectBox col-3">
 	<!-- 검색창 -->
