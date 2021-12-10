@@ -10,10 +10,18 @@ body {
 .pointer{
 	cursor:pointer;
 }
-.font-size-16{
-	font-size: 14px;
+.font-size-10{
+	font-size: 10px;
 }
 a:hover {text-decoration: none; font-size: bigger}
+
+.searchIconBox {
+	width : 50px;
+}
+.bg-lightgray {
+	background-color : rgb(242, 242, 242);
+}
+
 
 /*### 헤더 ###*/
 #header{
@@ -51,6 +59,7 @@ a:hover {text-decoration: none; font-size: bigger}
 {	text-decoration: none; 
 	font-weight : bold;
 }
+
 
 
 /*### 메인페이지 ###*/
@@ -101,29 +110,60 @@ a:hover {text-decoration: none; font-size: bigger}
 
 
 /*### 냉장고 화면 페이지 ###*/
+.ingrdSelectBox {
+	margin-left : 150px;
+}
 .ingrdSelectBox > .ingrdIconBox{
 	width:800px;
 	height:200px;
-  	overflow-x: scroll;
+  	overflow-y: scroll;
+  	background-color : white;
+  	padding-top : 10px;
+  	padding-bottom : 10px;
 }
 .ingrdIcon {
-	width: 60px;
+	width: 75px;
 	height: 90px;
-	border: 1px solid #999;
-	border-radius: 10%;
+}
+.ingrdIcon > .ingrdIconImg {
+	width: 60px;
+	height: 60px;
+ 	border: 1px solid #999;
+	border-radius: 50%;
 	box-shadow: 1px 1px 1px gray;
 	margin:5px;
 	background-color : white;
-	text-align : center;
+	text-align : center; 
 }
-.ingrdIcon> img {
-	width: 60px;
-	height: 60px;
+.ingrdIconImg > img {
+	 width : 60px;
+	 height : 60px;
 }
-.refrigeratorDoor {
-	background-color: rgb(44, 62, 80);
+/* 냉장고 */
+.refrigerator {
+	margin-left : 150px;
+}
+.refrigeratorDoor-1 {
+	background-color: white;
+	width: 350px;
+	height: 250px;
+	margin-bottom : 10px;
+	border : 1px solid #999;
+	border-radius: 10%;
+}
+.refrigeratorDoor-2 {
+	background-color: white;
+	width: 350px;
+	height: 340px;
+	border : 1px solid #999;
+	border-radius: 10%;
+}
+.refrigeratorDoor-3 {
+	background-color: white;
 	width: 350px;
 	height: 600px;
+	border : 1px solid #999;
+	border-radius: 10%;
 }
 .refrigeratorDoor>a {
 	display: inline-block;

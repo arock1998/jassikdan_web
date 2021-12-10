@@ -3,54 +3,57 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<!-- mypage 탭 -->
-
+<div class="container bg-lightgray">
 <!-- 재료 검색 -->
-	<div class="ingrdSelectBox col-3">
-	<!-- 검색창 -->
-		<div>
-			<input list="ingrdList" type="search" class="form-control" placeholder="재료이름, 분류">
+	<div class="ingrdSelectBox pt-3">
+		<div class="d-flex mb-2">
+			<div class="d-flex input-group col-6">
+				<input list="ingrdList" type="search" class="form-control" placeholder="재료를 입력하세요.">
+				<div class="input-group-append searchIconBox bg-ligthgray">
+					<a href="#" class="form-control"><img src="/static/images/icon/search.png" class="w-100 h-100"></a>
+				</div>
+			</div>
+			<div class="form-control col-2" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" ><img src="/static/images/icon/trashcan.png" width="25px" class="mr-1 pb-1"><span class="pt-2">정리하기</span></div>
 		</div>
-	<!-- 검색결과 --><!-- TODO: 끌어다가 냉장고에만 들어갈 수 있도록 만든다. -->
-		<div class=" ingrdIconBox d-flex flex-wrap overflow-auto" >
+	<!-- 검색결과 -->
+		<div class="ingrdIconBox d-flex flex-wrap overflow-auto ml-3">
 		<c:forEach items="${ingrdList}" var="ingrd">
 			<div id="${ingrd.id }" class="ingrdIcon pointer" draggable="true" ondragstart="drag(event)" >
-				<img class="border" src="/static/images/ingrd/${ingrd.nameEng}.png" alt="${ingrd.name}" draggable="false" >
-				<small>${ingrd.name}</small>
+				<div class="ingrdIconImg ">
+					<img class="w-75 h-75" src="/static/images/ingrd/${ingrd.nameEng}.png" alt="${ingrd.name}" draggable="false" >
+				</div>
+				<span class="font-size-10">${ingrd.name}</span>
 			</div>
 		</c:forEach>
 		</div>	
 	</div>
-	<!-- 휴지통 -->
-	<div>
-		
-	</div>
-
-<div class="d-flex mt-5">
-	<!-- 냉장고 -->
-	<div class="d-flex justify-content-around mb-5 " >
-		<!-- 냉동실 -->
-		<div id="layer1" class="refrigeratorDoor d-flex flex-wrap rounded mr-5" ondrop="drop(event)" ondragover="allowDrop(event)"> 
-		<c:forEach items="${ingrdIhaveList}" var="ingrd">
-			<div id="${ingrd.id }" class="card cursor ingrdIcon ingrdIhave m-1 text-center pointer" 
-			 data-toggle="modal" data-target="#my_modal" data-ingrd-id="${ingrd.id}" data-ingrd-name="${ingrd.name}" data-ingrd-amount="${ingrd.amount}" data-ingrd-expdate> <!-- ingrd_ihave의 아이디를 가진다.(primaryKey) , oncontextmenu 우측마우스 기본동작 없애기	 -->
-				<!-- 재료 영어이름의 띄어쓰기는 '_'로 등록되어있다. -->
-				<img class="border" src="/static/images/ingrd/${ingrd.nameEng}.png" alt="">
-				<small>${ingrd.name} <br>
-				${ingrd.amount}</small>
+	
+	<div class="d-flex mt-5 refrigerator">
+		<!-- 냉장고 -->
+		<div class="d-flex justify-content-around mb-5 ml-3">
+			<div>
+				<div id="layer1" class="refrigeratorDoor-1 d-flex flex-wrap rounded mr-5" ondrop="drop(event)" ondragover="allowDrop(event)"> 
+				</div>
+				<div id="layer1" class="refrigeratorDoor-2 d-flex flex-wrap rounded mr-5" ondrop="drop(event)" ondragover="allowDrop(event)"> 
+				<c:forEach items="${ingrdIhaveList}" var="ingrd">
+					<div id="${ingrd.id }" class="card cursor ingrdIcon ingrdIhave m-1 text-center pointer" draggable="true" ondragstart="dragstart_handler(event)"
+					 data-toggle="modal" data-target="#my_modal" data-ingrd-id="${ingrd.id}" data-ingrd-name="${ingrd.name}" data-ingrd-amount="${ingrd.amount}" data-ingrd-expdate> <!-- ingrd_ihave의 아이디를 가진다.(primaryKey) , oncontextmenu 우측마우스 기본동작 없애기	 -->
+						<!-- 재료 영어이름의 띄어쓰기는 '_'로 등록되어있다. -->
+						<div class="ingrdIconImg">
+							<img class="w-75 h-75" src="/static/images/ingrd/${ingrd.nameEng}.png" alt="" draggable="false">
+						</div>
+						<span class="font-size-10">${ingrd.name}</span>
+					</div>
+					</c:forEach>
+				</div>
 			</div>
-			</c:forEach>
-		</div>
-		<!-- 냉장실 -->
-		<div class="refrigeratorDoor rounded d-flex align-items-end justify-content-end"> 
-			<!-- 재료 추가하기 뷰로 가는 버튼 -->
-			<a href="/mypage/insert_ingrd_view" type="button" class="btn" >
-			 	<img src="https://w7.pngwing.com/pngs/833/426/png-transparent-black-shopping-cart-icon-for-free-black-shopping-cart-icon.png" class="w-100 h-100">
-			</a>
+			<!-- 냉장실 -->
+			<div class="refrigeratorDoor-3 rounded d-flex align-items-end justify-content-end" ondrop="drop(event)" ondragover="allowDrop(event)"> 
+
+			</div>
 		</div>
 	</div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="my_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -100,21 +103,9 @@
  	//재료 삭제
 	$('.ingrdDelete').on('click', function(e){
 		var ingrdIhaveId = $(this).parent().siblings('.modal-body').children('#modalIngrdId').val();
- 		$.ajax({
-			type:'post'
-			, url : '/ingrd_ihave/delete'
-			, data : {'ingrdIhaveId' : ingrdIhaveId }
-			, success : function(data){
-				if(data.result == 'success'){
-					//alert('성공');
-					location.reload();
-				} else {
-					alert('삭제실패');
-				}
-			}, error : function(e){
-				alert('error' + e);
-			}
-		}) ;
+
+ 		
+ 		deleteIngrdIhave(ingrdIhaveId);
 	});
 	
 	//재료 정보 수정
@@ -141,13 +132,14 @@
 		}) ; 
 	});
 });
-	//Drag and Drop// 
+	//Drag and Drop//
+	// 재료 추가용
+	 function drag(e){
+ 		e.dataTransfer.setData("text", e.target.id);
+ 	}
  	function allowDrop(e){
  		e.preventDefault();
  		e.dataTransfer.effectAllowed = 'copy';
- 	}
- 	function drag(e){
- 		e.dataTransfer.setData("text", e.target.id);
  	}
  	function drop(e){
  		e.preventDefault();
@@ -173,5 +165,49 @@
  			}
  		});
  	}
+ 	
+ 	//재료 삭제용 (쓰레기통으로 이동)
+ 	function dragstart_handler(e){
+ 		e.dataTransfer.setData("text/plain", e.target.id);
+ 	}
+ 	function dragover_handler(e){
+ 		e.preventDefault();
+ 		e.dataTransfer.dropEffect = "move";
+ 	}
+	function drop_handler(e){
+		e.preventDefault();
+		//대상의 id를 가져와 이동한 대상 DOM요소를 추가합니다.
+ 		var data = e.dataTransfer.getData("text");
+ 		e.target.appendChild(document.getElementById(data));
+ 		e.dataTransfer.effectAllowed = 'move';
+ 		deleteIngrdIhave(data);
+	}
+	function deleteIngrdIhave(ingrdIhaveId){
+ 		$.ajax({
+			type:'post'
+			, url : '/ingrd_ihave/delete'
+			, data : {'ingrdIhaveId' : ingrdIhaveId }
+			, success : function(data){
+				if(data.result == 'success'){
+					alert('성공');
+					location.reload();
+				} else {
+					alert('삭제실패');
+				}
+			}, error : function(e){
+				alert('error' + e);
+			}
+		});
+	}
+	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
 </script>
     
