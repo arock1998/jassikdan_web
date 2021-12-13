@@ -124,7 +124,7 @@
 					//alert('성공');
 					location.reload();
 				} else {
-					alert('');
+					alert('관리자에게 문의해주세요');
 				}
 			}, error : function(e){
 				alert('error' + e);

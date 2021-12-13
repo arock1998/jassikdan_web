@@ -3,11 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<!-- mypage 탭 -->
-<div class="d-flex">
-	<a href="/mypage/refrigerator_view" class="bg-info w-50 text-center p-3" >냉장고 관리</a>
-	<a href="#" class="bg-success w-50 text-center p-3">내가 올린 레시피</a>
-</div>
 <!-- 레시피 화면 -->
 <div>
 	<a href="/recipe/create_view" class="btn btn-secondary text-center w-100 mt-2">레시피 등록하기</a>
