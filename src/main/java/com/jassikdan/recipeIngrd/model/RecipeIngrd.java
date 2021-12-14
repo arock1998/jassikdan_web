@@ -8,7 +8,8 @@ public class RecipeIngrd {
 	private int recipeId;
 	private int ingrdId;
 	private String ingrdName;
-	private String amount;
+	private double amount;
+	private String unit;
 	private Date createdAt;
 	private Date updatedAt;
 	public int getId() {
@@ -35,11 +36,17 @@ public class RecipeIngrd {
 	public void setIngrdName(String ingrdName) {
 		this.ingrdName = ingrdName;
 	}
-	public String getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 	public Date getCreatedAt() {
 		return createdAt;

@@ -175,6 +175,11 @@ a:hover {text-decoration: none; font-size: bigger}
 }
 
 /*### 요리 등록 화면 ###*/ 
+#recipeImageBox{
+	width:200px;
+	height:200px;
+	background-color: #888;
+}
 .insertCourseBox{
 	width : 250px;
 	margin-right: 10px;

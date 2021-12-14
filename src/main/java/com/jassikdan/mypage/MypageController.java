@@ -50,23 +50,7 @@ public class MypageController {
 		model.addAttribute("viewName", "mypage/refrigerator");
 		return "template/layout";
 	}
-	
-	/**
-	 * 재료 등록 화면
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/mypage/insert_ingrd_view")
-	public String mypageInsertIngrdView(Model model) {
 		
-		//기본 재료 정보 가져오기 ingrd table
-		List<Ingrd> ingrdList = contentBO.getIngrdAll();
-		model.addAttribute("ingrdList", ingrdList);
-		
-		model.addAttribute("viewName", "mypage/insert_ingrd");
-		return "template/layout";
-	}
-	
 	/**
 	 * 내가 등록한 레시피 보여주는 화면
 	 * @param model

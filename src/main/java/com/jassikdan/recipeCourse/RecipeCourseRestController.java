@@ -29,8 +29,10 @@ public class RecipeCourseRestController {
 	@Autowired
 	private RecipeCourseBO recipeCourseBO;
 
+	// 여기 보지 말고 recipeRestController 볼 것 여기 모두 삭제될 수 도 있다.
+	
+	
 	//레시피 썸네일 세션에 저장
-	@PostMapping("/recipe/insert")
 	public Map<String, Object> recipeInsert(
 			@RequestParam("name") String name
 			, @RequestParam("description") String description
