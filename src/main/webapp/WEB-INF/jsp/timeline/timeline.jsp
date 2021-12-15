@@ -28,7 +28,7 @@
 <!-- 레시피 담는 곳 -->
 <div class="d-flex flex-wrap">
 	<c:forEach items="${contentList}" var="content">
-	<div class="recipeBox mr-2 mb-2 " data-reicpe-id="${content.recipe.id}">
+	<div class="recipeBox mr-2 mb-2 " data-recipe-id="${content.recipe.id}">
 		<div class="recipeImg goCourseBtn pointer">
 			<img src="${content.recipe.image}">
 		</div>
@@ -110,12 +110,11 @@
 			});
 		});
 		
-		//조리과정 view 로 이동
+		//조리과정 view로 이동
 		$('.goCourseBtn').on('click', function(){
-			var recipeId = $(this).data('recipe-id');
+			var recipeId = $(this).parents('.recipeBox').data('recipe-id');
 			location.href="/recipe/detail_view?recipeId=" + recipeId;
 		});
-		
 		
 		//좋아요 버튼 클릭
 		$('.likeBtn').on('click', function(e){

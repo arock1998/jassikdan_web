@@ -52,6 +52,7 @@ public class ContentBO {
 			//ingrdIconView.setExpirationDate(null);
 			
 			Ingrd ingrd = ingrdBO.getIngrdById(ingrdId);
+			
 			ingrdIconView.setName(ingrd.getName());
 			ingrdIconView.setNameEng(ingrd.getNameEng());
 			ingrdIconView.setSort(ingrd.getSort());

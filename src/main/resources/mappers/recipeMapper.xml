@@ -38,6 +38,23 @@
 		limit 2;
 	</select>
 	
+	<!-- 아이디로 레시피 가져오기 -->
+	<select id="selectRecipeById" resultType="com.jassikdan.recipe.model.Recipe">
+		SELECT 
+			`id`
+			, `userId`
+			, `name`
+			, `description`
+			, `nation`
+			, `image`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`recipe`
+		WHERE
+			`id` = ${recipeId}
+	</select>
+	
 	<!-- 레시피 첫 화면 등록 -->
 	<insert id="insertRecipe" parameterType="com.jassikdan.recipe.model.Recipe" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO

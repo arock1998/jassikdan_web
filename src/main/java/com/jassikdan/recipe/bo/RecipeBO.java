@@ -24,6 +24,11 @@ public class RecipeBO {
 		return recipeDAO.selectAllRecipe();
 	}
 	
+	//아이디로 레시피 가져오기
+	public Recipe getRecipeById(int recipeId) {
+		return recipeDAO.selectRecipeById(recipeId);
+	}
+	
 	//레시피 첫화면 등록
 	public void insertRecipe(Recipe recipe) {
 		recipeDAO.insertRecipe(recipe);
