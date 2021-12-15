@@ -19,8 +19,13 @@ public class SharpBO {
 		return sharpDAO.selectSharpListByUserId(userId);
 	}
 	
-	//샾 키워드 추가
+	//해시태그 추가
 	public void insertSharp(int userId, String keyword) {
 		sharpDAO.insertSharp(userId, keyword);
+	}
+	
+	//해시태그 삭제
+	public void deleteSharpById(int sharpId) {
+		sharpDAO.deleteSharpById(sharpId);
 	}
 }

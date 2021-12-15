@@ -2,43 +2,50 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
+<!-- /mypage/recipe_view -->
 <!-- 레시피 화면 -->
-<div>
-	<a href="/recipe/create_view" class="btn btn-secondary text-center w-100 mt-2">레시피 등록하기</a>
+<div class="mt-3 d-flex flex-wrap justify-content-around">
 	<c:forEach items="${contentList}" var="content">
-		<div class="recipeBox bg-light mt-3 d-flex">
-			<div class="mx-5 my-3">
-				<h3>${content.recipe.name}</h3>
-				<div class="d-flex">
-					<div class="mr-5">
-						<a href="/recipe/detail_view?recipeId=${content.recipe.id}"><img src="${content.recipe.image}" class="mt-2" width="400px" height="400px"></a>
+	<div class="recipeBox mr-2 mb-3 " data-reicpe-id="${content.recipe.id}">
+		<div class="recipeImg">
+			<img src="${content.recipe.image}" class="w-100 h-100">
+		</div>
+		<div class="p-1">
+			<div>
+				${content.recipe.name}
+			</div>
+			<div>
+				<c:forEach items="${content.sharp}" var="sharp">
+					<a href="#" class="text-primary"><small>#</small><small>${sharp}</small></a>
+				</c:forEach>
+			</div>
+			<div class="d-flex align-items-center">
+				<!-- 좋아요 -->
+				<div class="d-flex mr-3 align-items-center">			
+					<div class="likeBtn mr-1" data-recipe-id="${content.recipe.id}" data-like-yn="${content.likeYn}">
+						<c:if test="${content.likeYn eq true }">
+							<img src="/static/images/icon/fillheart.png" width="30px">
+						</c:if>
+						<c:if test="${content.likeYn eq false }">
+							<img src="/static/images/icon/binheart.png" width="30px">
+						</c:if>
 					</div>
-					<div class="mt-1">
-						<!-- 레시피 설명 부분 -->
-						<div class="h-75">
-							${content.recipe.description}
-						</div>
-						<!-- 좋아요 버튼 -->
-						<div>
-							<a href="#" data-recipe-id=${content.recipe.id} data-like-yn="${content.likeYn}" class="likeBtn"> 
-							<c:choose>
-							<c:when test="${content.likeYn eq true}">
-								<img src="/static/images/icon/fillheart.png">
-							</c:when>
-							<c:otherwise>
-								<img src="/static/images/icon/binheart.png">
-							</c:otherwise> 
-							</c:choose>
-							</a>
-							<small class="text-secondary">${content.countLike}개</small>
-						</div>
+					<div class="font-size-10">
+						${content.countLike}
+					</div>
+				</div>
+				<!-- 리뷰 -->
+				<div class="">
+					<div class="font-size-10">
+						리뷰개수
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</c:forEach>
 </div>
+
 <script>
 	$(document).ready(function(){
 		//좋아요 버튼 클릭

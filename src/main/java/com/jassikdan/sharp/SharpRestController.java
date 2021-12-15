@@ -19,9 +19,9 @@ public class SharpRestController {
 	@Autowired
 	private SharpBO sharpBO;
 	
-	//샾 키워드 추가
+	//해시태그 추가
 	@RequestMapping("/sharp/insert")
-	public Map<String, Object> sharp( 
+	public Map<String, Object> sharpInsert( 
 			@RequestParam ("keyword") String keyword
 			, HttpServletRequest request ){
 		HttpSession session = request.getSession();
@@ -34,5 +34,21 @@ public class SharpRestController {
 		result.put("result", "success");
 		return result;
 	}
+	
+	//해시태그 삭제
+	@RequestMapping("/sharp/delete")
+	public Map<String, Object> sharpDelete(
+			@RequestParam("sharpId") int sharpId 
+			){
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "error");
+		sharpBO.deleteSharpById(sharpId);
+		
+		result.put("result", "success");
+		return result;		
+	}
+	
+	
+	
 	
 }

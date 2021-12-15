@@ -30,43 +30,7 @@ public class RecipeCourseRestController {
 	private RecipeCourseBO recipeCourseBO;
 
 	// 여기 보지 말고 recipeRestController 볼 것 여기 모두 삭제될 수 도 있다.
-	
-	
-	//레시피 썸네일 세션에 저장
-	public Map<String, Object> recipeInsert(
-			@RequestParam("name") String name
-			, @RequestParam("description") String description
-			, @RequestParam(value="image", required=false) MultipartFile image
-			, @RequestParam("nation") String nation
-			, HttpServletRequest request){
-		HttpSession session = request.getSession();
-		Integer userId = (Integer) session.getAttribute("userId");
-		long currentTimeMillis = System.currentTimeMillis();
-		session.setAttribute("currentTimeMillis", currentTimeMillis);
-		//id 가져와서 재료등록
-		//id 가져와서 세션에 저장
-		Map<String, Object> result = new HashMap<>();
-		result.put("result", "error");
-		//저장된 recipe를 세션에 저장해둔다.
-		
-		Recipe recipe = new Recipe();
-		recipe.setUserId(userId);
-		recipe.setName(name);
-		recipe.setDescription(description);
-		recipe.setNation(nation);
-		String filePath = "";
-		try {
-			filePath = fileManagerSerice.saveRecipe(userId, currentTimeMillis, image);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		recipe.setImage(filePath);
-		session.setAttribute("recipe", recipe);
-		
-		result.put("result", "success");
-		return result;
-	}
-	
+
 	//view에서 get으로 받은 cookingNo를 받아서 순서대로 저장하자
 	@PostMapping("/recipe/insert_detail")
 	public Map<String, Object> recipeInsertDetail(

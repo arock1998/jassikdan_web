@@ -35,7 +35,7 @@
 			, `updatedAt`
 		FROM
 			`recipe`
-		limit 20;
+		limit 2;
 	</select>
 	
 	<!-- 레시피 첫 화면 등록 -->

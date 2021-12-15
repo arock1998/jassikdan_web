@@ -190,6 +190,18 @@ a:hover {text-decoration: none; font-size: bigger}
 	background-color: black;
 }
 
+/*### timeline 화면 ###*/
+.recipeBox {
+	width:300px;
+	border-radius: 5%;
+	box-shadow: 1px 1px 5px #999;
+}
+.reicpeBox > .recipeImg {
+	width : 300px;
+	height : 300px;
+	background-color : black;
+}
+
 
 
 

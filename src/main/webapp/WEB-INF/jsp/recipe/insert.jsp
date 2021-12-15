@@ -211,6 +211,18 @@
 						var recipeId = data.recipeId;
 						//재료 등록
 						alert("recipeId:" + recipeId);
+						
+						//두번째 ajax 통신
+				
+						
+						
+						
+						
+						
+						
+						
+						
+						
 					} else{
 						alert('error: 관리자에게 문의해주세요');
 					}
@@ -221,5 +233,4 @@
 			});
 		});
 	});
-
 </script>
