@@ -1,7 +1,7 @@
 # jassikdan_web
 
 > main page
-<img src="https://user-images.githubusercontent.com/81209784/145163275-21ea61bb-b03c-44eb-a269-752e7117d122.jpg" width="600px">
+<img src="https://user-images.githubusercontent.com/81209784/146525168-5be52f52-805b-405a-87b0-30f53728b714.jpg" width="600px">
 
 > signUp page
 <img src="https://user-images.githubusercontent.com/81209784/145163632-522b2867-e64f-4ed5-8c3d-4314aa7baeb9.jpg" width="600px">
