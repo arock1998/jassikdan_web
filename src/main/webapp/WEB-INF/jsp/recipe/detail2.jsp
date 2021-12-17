@@ -24,44 +24,9 @@
 		<a href="/recipe/detail_view?recipeId=${recipeId}&cookingNo=${cookingNo+1}" class="next"><img src="/static/images/icon/next.png" ></a>
 	</div>
 </div>
-<button type="button" class="btn btn-primary w-100 mb-5" data-toggle="modal" data-target="#courseModal">이 레시피 사용하기</button>
 
-<!-- Modal -->
-<div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">필요한 재료</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <!-- modal body -->
-      <div class="modal-body">
-		<table class="table text-center">
-			<thead>
-				<tr>
-					<th>재료명</th><th>필요한 량</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${recipeIngrdList}" var="ingrd">
-				<tr>
-					<td>${ingrd.ingrdName}</td><td>${ingrd.amount}</td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-      </div>
-      <div class="modal-footer">
-		<c:if test="${isEnough eq false}">
-		<button class="w-50 btn btn-danger text-white courseModalBtn"><small>재료가 부족합니다.</small><br><b>장보러가기</b></button>
-		</c:if>
-		<button id="useRecipeBtn" class="w-50 btn btn-primary text-white courseModalBtn"><b>재료 사용하여 레시피 만들기</b></button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 
 <script>
 	$(document).ready(function(){
