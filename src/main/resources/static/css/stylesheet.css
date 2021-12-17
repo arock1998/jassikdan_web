@@ -4,9 +4,7 @@
 body {
 	margin: 0;
 }
-.bg-green{
-	background-color:#C5C9A4;
-}
+
 .pointer{
 	cursor:pointer;
 }
@@ -20,6 +18,18 @@ a:hover {text-decoration: none; font-size: bigger}
 }
 .bg-lightgray {
 	background-color : rgb(242, 242, 242);
+}
+.bg-whitegreen{
+	background-color : rgb(246, 248, 237);
+}
+.bg-green{
+	background-color:rgb(167, 173, 113);
+}
+.bg-darkgreen{
+	background-color: #002919;
+}
+.text-green{
+	color: rgb(167, 173, 113);;
 }
 .text-darkgreen{
 	color: #002919;
@@ -201,6 +211,17 @@ a:hover {text-decoration: none; font-size: bigger}
 	height : 300px;
 	background-color : black;
 }
+
+/* recipe/detail_view*/
+#recipeDetailContainer{
+	margin : 0 auto;
+}
+.smallCircle {
+	width:30px;
+	height:30px;
+	border-radius: 50%;
+}
+
 
 
 

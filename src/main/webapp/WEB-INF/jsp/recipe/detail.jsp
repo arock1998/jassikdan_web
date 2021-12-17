@@ -2,4 +2,50 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
+<!-- recipe/detail_view -->
+<div id="recipeDetailContainer" class="w-100">
+	<div class="my-3 text-center">
+		<div class="mb-1">
+			<img src="${recipe.image}" width="400px">
+		</div>
+		<div >
+			<h1 class="">${recipe.name}</h1>
+		</div>
+	</div>
+	<!-- 재료목록 들어가는 곳 -->
+	<div class="">
+		<div class="d-flex flex-wrap">
+			<table class="table w-50">
+				<thead>
+					<tr>
+						<th>재료</th><th>필요한 량</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach items="${recipeIngrdList}" var="ingrd">
+					<tr>
+						<td>${ingrd.name}</td><td>${ingrd.amount} + ${ingrd.unit}</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- 조리과정 들어가는 곳 -->
+	<div class="bg-whitegreen mb-5 p-5">
+		<div class="text-green font-weight-bold">Recipe</div> <br>
+		<c:forEach items="${courseList}" var="course" >
+		<div class="mb-3">
+			<div class="bg-green smallCircle text-white text-center font-weight-bold mb-1">${course.cookingNo}</div>
+			<div class="mb-1">
+				<img src="${course.image}" alt="${course.cookingNo}" width="300px">
+			</div>
+			<div>
+				<span>
+					${course.description}
+				</span>
+			</div>
+		</div>
+		</c:forEach>
+	</div>
+</div>

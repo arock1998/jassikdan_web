@@ -15,7 +15,7 @@ public class RecipeIngrdBO {
 	private RecipeIngrdDAO recipeIngrdDAO;
 
 	//레시피에 대한 재료 가져오기
-	public List<RecipeIngrd> getRecipeIngrdById(int recipeId){
-		return recipeIngrdDAO.selectRecipeIngrdById(recipeId);
+	public List<RecipeIngrd> getRecipeIngrdByRecipeId(int recipeId){
+		return recipeIngrdDAO.selectRecipeIngrdByRecipeId(recipeId);
 	}
 }

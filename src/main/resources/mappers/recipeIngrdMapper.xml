@@ -4,7 +4,7 @@
  
 <mapper namespace="com.jassikdan.recipeIngrd.dao.RecipeIngrdDAO">
 	<!-- 레시피에 들어가는 재료 가져오기 -->
-	<select id="selectRecipeIngrdById" resultType="com.jassikdan.recipeIngrd.model.RecipeIngrd">
+	<select id="selectRecipeIngrdByRecipeId" resultType="com.jassikdan.recipeIngrd.model.RecipeIngrd">
 		SELECT 
 			`id`
 			, `recipeId`

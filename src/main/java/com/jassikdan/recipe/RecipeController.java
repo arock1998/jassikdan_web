@@ -1,6 +1,5 @@
 package com.jassikdan.recipe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,8 @@ import com.jassikdan.recipe.bo.RecipeBO;
 import com.jassikdan.recipe.model.Recipe;
 import com.jassikdan.recipeCourse.bo.RecipeCourseBO;
 import com.jassikdan.recipeCourse.model.RecipeCourse;
+import com.jassikdan.recipeIngrd.bo.RecipeIngrdBO;
+import com.jassikdan.recipeIngrd.model.RecipeIngrd;
 
 @Controller
 public class RecipeController {
@@ -24,6 +25,8 @@ public class RecipeController {
 	private RecipeBO recipeBO;
 	@Autowired
 	private RecipeCourseBO recipeCourseBO;
+	@Autowired
+	private RecipeIngrdBO recipeIngrdBO;
 
 	/**
 	 * 레시피 등록 화면
@@ -63,7 +66,9 @@ public class RecipeController {
 		model.addAttribute("recipe", recipe);
 		List<RecipeCourse> courseList = recipeCourseBO.getRecipeCourseByRecipeId(recipeId);
 		model.addAttribute("courseList", courseList);
-	
+		List<RecipeIngrd> recipeIngrdList = recipeIngrdBO.getRecipeIngrdByRecipeId(recipeId);
+		model.addAttribute("recipeIngrdList", recipeIngrdList);
+		
 		return "template/layout";
 	}
 }

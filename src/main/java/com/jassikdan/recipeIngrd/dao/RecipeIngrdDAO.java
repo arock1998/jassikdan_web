@@ -10,6 +10,6 @@ import com.jassikdan.recipeIngrd.model.RecipeIngrd;
 public interface RecipeIngrdDAO {
 	
 	//레시피에 대한 재료 가져오기
-	public List<RecipeIngrd> selectRecipeIngrdById(int recipeId);
+	public List<RecipeIngrd> selectRecipeIngrdByRecipeId(int recipeId);
 
 }

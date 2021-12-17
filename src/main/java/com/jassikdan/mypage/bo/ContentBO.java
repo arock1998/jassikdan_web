@@ -102,7 +102,7 @@ public class ContentBO {
 			// 데이터 상으로는 한식, 중국, 일본, 이탈리아, 서양, 퓨전, 동남아시아로 나뉘어져 있다.
 			String nation = recipe.getNation();
 			recipeSharpList.add(nation);
-			for(RecipeIngrd item :recipeIngrdBO.getRecipeIngrdById(recipeId)) {
+			for(RecipeIngrd item :recipeIngrdBO.getRecipeIngrdByRecipeId(recipeId)) {
 				recipeSharpList.add(item.getIngrdName());
 			}
 			content.setSharp(recipeSharpList);
@@ -142,7 +142,7 @@ public class ContentBO {
 	//레시피 선택으로 냉장고속 재료 사용
 	public void useRecipe(int userId, int recipeId) {
 		
-		List<RecipeIngrd> recipeIngrdList = recipeIngrdBO.getRecipeIngrdById(recipeId);
+		List<RecipeIngrd> recipeIngrdList = recipeIngrdBO.getRecipeIngrdByRecipeId(recipeId);
 		List<IngrdIhave> ingrdIhaveList = ingrdIhaveBO.getIngrdIhaveByUserId(userId);
 		
 		for(RecipeIngrd recipeIngrd : recipeIngrdList) {
