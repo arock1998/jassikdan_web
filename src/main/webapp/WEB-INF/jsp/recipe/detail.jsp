@@ -24,7 +24,7 @@
 				<tbody>
 				<c:forEach items="${recipeIngrdList}" var="ingrd">
 					<tr>
-						<td>${ingrd.name}</td><td>${ingrd.amount} + ${ingrd.unit}</td>
+						<td>${ingrd.ingrdName}</td><td>${ingrd.amount} ${ingrd.unit}</td>
 					</tr>
 				</c:forEach>
 				</tbody>
@@ -33,14 +33,14 @@
 	</div>
 	<!-- 조리과정 들어가는 곳 -->
 	<div class="bg-whitegreen mb-5 p-5">
-		<div class="text-green font-weight-bold">Recipe</div> <br>
+		<div class="text-green font-weight-bold w-100 text-center">Recipe</div> <br>
 		<c:forEach items="${courseList}" var="course" >
-		<div class="mb-3">
+		<div class="mb-3 w-100 text-center">
 			<div class="bg-green smallCircle text-white text-center font-weight-bold mb-1">${course.cookingNo}</div>
-			<div class="mb-1">
-				<img src="${course.image}" alt="${course.cookingNo}" width="300px">
+			<div class="mb-1 text-center w-100">
+				<img src="${course.image}" alt="${course.cookingNo}" width="450px">
 			</div>
-			<div>
+			<div class="w-50 text-center d-inline">
 				<span>
 					${course.description}
 				</span>
@@ -50,7 +50,6 @@
 	</div>
 	<button type="button" class="btn btn-primary w-100 mb-5" data-toggle="modal" data-target="#courseModal">이 레시피 사용하기</button>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -72,14 +71,14 @@
 			<tbody>
 				<c:forEach items="${recipeIngrdList}" var="ingrd">
 				<tr>
-					<td>${ingrd.ingrdName}</td><td>${ingrd.amount}</td>
+					<td>${ingrd.ingrdName}</td><td>${ingrd.amount} ${ingrd.unit }</td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
       </div>
       <div class="modal-footer">
-		<c:if test="${isEnough eq false}">
+		<c:if test="${true}">
 		<button class="w-50 btn btn-danger text-white courseModalBtn"><small>재료가 부족합니다.</small><br><b>장보러가기</b></button>
 		</c:if>
 		<button id="useRecipeBtn" class="w-50 btn btn-primary text-white courseModalBtn"><b>재료 사용하여 레시피 만들기</b></button>
@@ -87,3 +86,24 @@
     </div>
   </div>
 </div>
+<script>
+	$(document).ready(function(){
+		//재료 사용하여 레시피 만들기
+		$('#useRecipeBtn').on('click', function(){
+			var recipeId = $('.courseContent').data('recipeId');
+			$.ajax({
+				type:'post'
+				, url:'/mypage/use_recipe'
+				, data : {'recipeId': recipeId}
+				, success : function(data){
+					if(data.result == 'success'){
+						alert('이 레시피를 사용하셨습니다.');
+					}
+				}, error : function(e){
+					alert('error:' + e);
+				}
+			});
+		});
+	});
+		
+</script>

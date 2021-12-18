@@ -11,6 +11,7 @@
 			, `ingrdId`
 			, `ingrdName`
 			, `amount`
+			, `unit`
 			, `createdAt`
 			, `updatedAt`
 		FROM
