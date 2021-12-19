@@ -50,6 +50,7 @@
 	<hr>
 	<hr>
 <!-- 요리 과정 등록 -->
+<form id="formCourse" action="/recipe/insert_course" method="post">
 	<div class="mb-5 ml-4">
 		<div class="font-weight-bold mb-3">상세내용 등록하기</div>
 		<div class="bg-light">	
@@ -61,11 +62,12 @@
 					<!-- 반복되는 부분 -->
 					<div class="insertCourseBox">
 						<div class="insertCourseImgBox mb-1" >
-							<img  alt="사진을 넣어주세용~~" src="">
+							<img alt="사진을 넣어주세용~~" src="">
 						</div>
+						<input class="hidden" name="courseList[${val}].cookingNo" value="${val}">
 						<div> ${val}번째 과정</div>
-						<div><input class="courseImg" type="file"></div>
-						<div><input type="text" class="courseDescription form-control" placeholder="조리과정 설명"></div>
+						<div><input name="courseList[${val}].image" class="courseImg" type="file"></div>
+						<div><input name="courseList[${val}].description" type="text" class="courseDescription form-control" placeholder="조리과정 설명"></div>
 					</div>
 				</c:forEach>
 			<!-- 다음 버튼 -->
@@ -73,6 +75,7 @@
 			</div>
 		</div>
 	</div>
+</form>
 	<hr>
 	<hr>
 <!-- 재료등록 -->
@@ -127,7 +130,7 @@
 		//저장 후 공개를 눌렀을 때	 --> 너무 이상한 데이터이면 어떡하지?? 일단 만개의 레시피는 삭제되지 않는 것 같다.
 		$('#save').on('click', function(){
 			var recipeName = $('#recipeName').val().trim();
-			var recipeDescription = $('#recipeName').val().trim();
+			var recipeDescription = $('#recipeDescription').val().trim();
 			var recipeImage = $('#recipeImage').val();
 			var recipeNation = $('#recipeNation').val();
 			//validation TODO: 레시피 이미지 등록시 바로 validation!
@@ -161,11 +164,11 @@
 			formData.append('recipeNation', recipeNation);
 			alert("formData" + formData);
 			
-			//레시피 과정 정보 등록		
+			//레시피 과정 정보 등록		//validation 후 form데이터로 전달
 			var courseList = new Array();
 			var userId = 1; //아니 어차피 중간에 recipeId 넣어줘야해서
 			$('.insertCourseBox').each(function(){
-				//var courseImg = $(this).children('.courseDescription').val().trim();
+				var courseImg = $('.courseImg').val();
 				var courseDescription = $(this).find('.courseDescription').val().trim();
 	            //josn 파일로 전달하자!
             	// 객체 생성
@@ -201,7 +204,7 @@
 			//TODO: 2) 통신을 한번한 후 서버에서 모든 데이터를 나눈다. (내 능력이 부족하다.)
 			$.ajax({
 				type: "post"
-				, url : "/recipe/insert"
+				, url : "/recipe/insert_recipe"
 				, data : formData
 				, enctype : 'multipart/form-data'		//사진을 넣기 위한 세가지
 				, processData : false
@@ -212,18 +215,12 @@
 						//재료 등록
 						alert("recipeId:" + recipeId);
 						
-						//두번째 ajax 통신
-				
+						// recipe_course의 submit을 허락한다.
+						$('#formCourse').submit();
+						alert("서브밋 했어용~")
 						
 						
-						
-						
-						
-						
-						
-						
-						
-					} else{
+					} else {
 						alert('error: 관리자에게 문의해주세요');
 					}
 				}
