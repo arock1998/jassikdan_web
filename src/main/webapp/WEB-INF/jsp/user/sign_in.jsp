@@ -19,13 +19,14 @@
 			<a href="/user/sign_up_view" class="text-secondary small ml-2">회원가입</a></div>
 		</div>
 		<!-- TODO: 로그인 연동 API 공부해서 불러오기 -->
-		<a href="naver.com">네이버</a>
-		<a href="naver.com">구글</a>
-		<a href="naver.com">카카오</a>
-		<a href="naver.com">페이스북</a>
+		<div class="d-flex justify-content-around mt-3">
+		<div><a href="naver.com">네이버</a></div>
+		<div><a href="naver.com">구글</a></div>
+		<div><a href="naver.com">카카오</a></div>
+		<div><a href="naver.com">페이스북</a></div>
+		</div>
 	</div>
 </div>
-
 <script>
 	$(document).ready(function(){
 		//로그인 버튼 클릭

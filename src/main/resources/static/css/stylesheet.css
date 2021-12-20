@@ -188,7 +188,7 @@ a:hover {text-decoration: none; font-size: bigger}
 #recipeImageBox{
 	width:200px;
 	height:200px;
-	background-color: #888;
+	background-color: #999;
 }
 .insertCourseBox{
 	width : 250px;
@@ -197,7 +197,7 @@ a:hover {text-decoration: none; font-size: bigger}
 .insertCourseImgBox {
 	width:200px;
 	height:200px;
-	background-color: black;
+	background-color: #999;
 }
 
 /*### timeline 화면 ###*/

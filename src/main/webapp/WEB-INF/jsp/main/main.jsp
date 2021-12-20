@@ -88,7 +88,7 @@
 				</div>
 			</div>
 		<!-- ### contents ### -->
-		<div class="contents d-flex justify-content-center">
+		<div class="contents d-flex justify-content-center bg-whitegreen">
 			<div>
 				<div class="text-center text-box p-3">
 					<br><b>INGREDIENT LIST</b><br>

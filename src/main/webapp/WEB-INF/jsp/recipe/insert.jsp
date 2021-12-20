@@ -61,8 +61,8 @@
 				<c:forEach begin="1" end="${endNum}" step="1" var="val">
 					<!-- 반복되는 부분 -->
 					<div class="insertCourseBox">
-						<div class="insertCourseImgBox mb-1" >
-							<img alt="사진을 넣어주세용~~" src="">
+						<div class="insertCourseImgBox  mb-1" >
+							<img alt="" src="">
 						</div>
 						<input class="hidden" name="courseList[${val}].cookingNo" value="${val}">
 						<div> ${val}번째 과정</div>
