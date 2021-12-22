@@ -39,27 +39,31 @@ public class ContentBO {
 	private SharpBO sharpBO;
 	
 	//재료 아이콘 생성하기
-	public List<IngrdIconView> generateIngrdIhaveIconViewListById(int userId){
-		List<IngrdIconView> ingrdList = new ArrayList<>();
-		List<IngrdIhave> ingrdIhaveList = ingrdIhaveBO.getIngrdIhaveByUserId(userId);
-		
-		for(IngrdIhave item : ingrdIhaveList) {
-			IngrdIconView ingrdIconView = new IngrdIconView();
-			int ingrdId = item.getIngrdId();
-			ingrdIconView.setId(item.getId());
-			ingrdIconView.setIngrdId(ingrdId);
-			ingrdIconView.setAmount(item.getAmount());
-			//ingrdIconView.setExpirationDate(null);
-			
-			Ingrd ingrd = ingrdBO.getIngrdById(ingrdId);
-			
-			ingrdIconView.setName(ingrd.getName());
-			ingrdIconView.setNameEng(ingrd.getNameEng());
-			ingrdIconView.setSort(ingrd.getSort());
-			
-			ingrdList.add(ingrdIconView);
+	public List<List<IngrdIconView>> generateIngrdIhaveIconViewListById(int userId){
+		List<List<IngrdIconView>> finalIngrdList = new ArrayList<>();
+		for(int i = 1 ; i < 4 ; i++ ) {
+			List<IngrdIconView> ingrdList = new ArrayList<>(8);
+			List<IngrdIhave> ingrdIhaveList = ingrdIhaveBO.getIngrdIhaveByUserIdRefrigeNum(userId, i);
+			for (IngrdIhave item : ingrdIhaveList) {
+				IngrdIconView ingrdIconView = new IngrdIconView();
+				int ingrdId = item.getIngrdId();
+				ingrdIconView.setId(item.getId());
+				ingrdIconView.setIngrdId(ingrdId);
+				ingrdIconView.setAmount(item.getAmount());
+				//ingrdIconView.setExpirationDate(null);
+
+				Ingrd ingrd = ingrdBO.getIngrdById(ingrdId);
+
+				ingrdIconView.setName(ingrd.getName());
+				ingrdIconView.setNameEng(ingrd.getNameEng());
+				ingrdIconView.setSort(ingrd.getSort());
+
+				ingrdList.add(ingrdIconView);
+			}
+			finalIngrdList.add(ingrdList);
 		}
-		return ingrdList;
+
+		return finalIngrdList;
 	}
 	
 	//모든 개본 재료 정보 가져오기

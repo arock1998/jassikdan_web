@@ -22,9 +22,14 @@ public class IngrdIhaveBO {
 		return ingrdIhaveDAO.selectIngrdIhaveByUserId(userId);
 	}
 
+	//userId, refrigeratorNum 로 냉장고 속 재료 리스트 가져오기
+	public List<IngrdIhave> getIngrdIhaveByUserIdRefrigeNum(int userId, int refrigeratorNum){
+		return ingrdIhaveDAO.selectIngrdIhaveByUserIdRefrigeNum(userId, refrigeratorNum);
+	}
+
 	//구매한 재료 등록하기
-	public void insertIngrdIhave(int userId, int ingrdId) {
-		ingrdIhaveDAO.insertIngrdIhave(userId, ingrdId);
+	public void insertIngrdIhave(int userId, int ingrdId, int refrigeratorNum) {
+		ingrdIhaveDAO.insertIngrdIhave(userId, ingrdId, refrigeratorNum);
 	}
 	
 	//가지고 있는 재료 수정

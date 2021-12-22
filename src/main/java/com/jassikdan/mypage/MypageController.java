@@ -44,9 +44,11 @@ public class MypageController {
 		model.addAttribute("ingrdList", ingrdList);
 		
 		//user의 재료 리스트 가져오기
-		List<IngrdIconView> ingrdIhaveList = contentBO.generateIngrdIhaveIconViewListById(userId);
-		model.addAttribute("ingrdIhaveList", ingrdIhaveList);
-		
+		List<List<IngrdIconView>> ingrdIhaveList = contentBO.generateIngrdIhaveIconViewListById(userId);
+		model.addAttribute("ingrdIhaveList1", ingrdIhaveList.get(0));
+		model.addAttribute("ingrdIhaveList2", ingrdIhaveList.get(1));
+		model.addAttribute("ingrdIhaveList3", ingrdIhaveList.get(2));
+
 		model.addAttribute("viewName", "mypage/refrigerator");
 		return "template/layout";
 	}

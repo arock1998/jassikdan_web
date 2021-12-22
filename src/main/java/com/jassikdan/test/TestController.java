@@ -19,7 +19,7 @@ public class TestController {
 	
 	@ResponseBody
 	@RequestMapping("/test01")
-	public String helloWrold() {
+	public String helloWorld() {
 		return "Hello world!";
 	}
 	

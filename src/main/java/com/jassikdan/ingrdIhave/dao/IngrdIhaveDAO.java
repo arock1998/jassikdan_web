@@ -13,12 +13,18 @@ public interface IngrdIhaveDAO {
 	
 	//userId로 냉장고 속 재료 리스트 가져오기
 	public List<IngrdIhave> selectIngrdIhaveByUserId(int userId);
-	
+
+	//userId, refrigeratorNum 로 냉장고 속 재료 리스트 가져오기
+	public List<IngrdIhave> selectIngrdIhaveByUserIdRefrigeNum(
+			@Param("userId") int userId
+			, @Param("refrigeratorNum") int refrigeratorNum);
+
 	//구매한 재료 등록하기
 	public void insertIngrdIhave(
 			@Param("userId") int userId
-			, @Param("ingrdId") int ingrdId);
-		
+			, @Param("ingrdId") int ingrdId
+			, @Param("refrigeratorNum") int refrigeratorNum);
+
 	//가지고 있는 재료 정보 수정
 	public void updateIngrdIhave(
 			@Param("ingrdIhaveId") int ingrdIhaveId

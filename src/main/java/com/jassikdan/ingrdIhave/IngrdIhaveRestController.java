@@ -28,6 +28,7 @@ public class IngrdIhaveRestController {
 	@RequestMapping("/ingrd_ihave/insert")
 	public Map<String, Object> ingrdIhaveInsert(
 			@RequestParam("ingrdId") int ingrdId
+			, @RequestParam(value="refrigeratorNum", defaultValue = "3" ) int refrigeratorNum
 			, HttpServletRequest request
 			){
 		HttpSession session = request.getSession();
@@ -36,7 +37,7 @@ public class IngrdIhaveRestController {
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "error");
 		
-		ingrdIhaveBO.insertIngrdIhave(userId, ingrdId);
+		ingrdIhaveBO.insertIngrdIhave(userId, ingrdId, refrigeratorNum);
 		result.put("result", "success");
 		return result;
 	}

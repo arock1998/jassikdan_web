@@ -7,11 +7,14 @@ public class IngrdIhave {
 	private int id;
 	private int userId;
 	private int ingrdId;
+	private String refrigeratorNum;
 	private String expirationDate; // null 가능
 	private String amount;
 	private Date createdAt;
 	private Date updatedAt;
-	
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -29,6 +32,12 @@ public class IngrdIhave {
 	}
 	public void setIngrdId(int ingrdId) {
 		this.ingrdId = ingrdId;
+	}
+	public String getRefrigeratorNum() {
+		return refrigeratorNum;
+	}
+	public void setRefrigeratorNum(String refrigeratorNum) {
+		this.refrigeratorNum = refrigeratorNum;
 	}
 	public String getExpirationDate() {
 		return expirationDate;

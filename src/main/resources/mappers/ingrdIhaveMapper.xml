@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
 <mapper namespace="com.jassikdan.ingrdIhave.dao.IngrdIhaveDAO">
 	<!-- userId로 냉장고 속 재료 리스트 가져오기 -->
 	<select id="selectIngrdIhaveByUserId" parameterType="int" resultType="com.jassikdan.ingrdIhave.model.IngrdIhave">
@@ -9,6 +8,7 @@
 			`id`
 			, `userId`
 			, `ingrdId`
+			, `refrigeratorNum`
 			, `expirationDate`
 			, `amount`
 			, `createdAt`
@@ -18,7 +18,25 @@
 		WHERE 
 			`userId` = #{userId}
 	</select>
-	
+	<!-- userId, refrigeratorNum로 냉장고 속 재료 리스트 가져오기 -->
+	<select id="selectIngrdIhaveByUserIdRefrigeNum" parameterType="map" resultType="com.jassikdan.ingrdIhave.model.IngrdIhave">
+		SELECT
+			`id`
+			, `userId`
+			, `ingrdId`
+			, `refrigeratorNum`
+			, `expirationDate`
+			, `amount`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`ingrd_ihave`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`refrigeratorNum` = #{refrigeratorNum}
+
+	</select>
 	<!-- 구입한 재료 등록하기 -->
 	<insert id="insertIngrdIhave" parameterType="map">
 		INSERT INTO
@@ -26,6 +44,7 @@
 		(
 			`userId`
 			, `ingrdId`
+			, `refrigeratorNum`
 			, `createdAt`
 			, `updatedAt`
 		)
@@ -33,6 +52,7 @@
 		( 
 			#{userId}
 			, #{ingrdId}
+			, #{refrigeratorNum}
 			, NOW()
 			, NOW()
 		)

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
 <div class="container bg-lightgray">
 <!-- 재료 검색 -->
 	<div class="ingrdSelectBox pt-3">
@@ -13,7 +12,11 @@
 					<a href="#" class="form-control"><img src="/static/images/icon/search.png" class="w-100 h-100"></a>
 				</div>
 			</div>
-			<div class="form-control col-2" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" ><img src="/static/images/icon/trashcan.png" width="25px" class="mr-1 pb-1"><span class="pt-2">정리하기</span></div>
+                <div class="form-control col-2" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" >
+                    <img src="/static/images/icon/trashcan.png" width="25px" class="mr-1 pb-1">
+                    <span class="pt-2">정리하기</span>
+                </div>
+                <small class="text-secondary">*버리고 싶은 냉장고 속 아이콘을 끌어다 놓으세요!</small>
 		</div>
 	<!-- 검색결과 -->
 		<div class="ingrdIconBox d-flex flex-wrap overflow-auto ml-3">
@@ -27,15 +30,30 @@
 		</c:forEach>
 		</div>	
 	</div>
-	
 	<div class="d-flex mt-5 refrigerator">
 		<!-- 냉장고 -->
 		<div class="d-flex justify-content-around mb-5 ml-3">
 			<div>
-				<div id="layer1" class="refrigeratorDoor-1 d-flex flex-wrap rounded mr-5" ondrop="drop(event)" ondragover="allowDrop(event)"> 
+			    <div>
+            		<span class="text-primary">-18ºC</span>
+            	</div>
+				<div id="layer1" class="refrigeratorDoor-1 d-flex flex-wrap rounded mr-5" ondrop="drop(event)" ondragover="allowDrop(event)">
+             	    <c:forEach items="${ingrdIhaveList1}" var="ingrd">
+                        <div id="${ingrd.id }" class="card cursor ingrdIcon ingrdIhave m-1 text-center pointer" draggable="true" ondragstart="dragstart_handler(event)"
+                    	    data-toggle="modal" data-target="#my_modal" data-ingrd-id="${ingrd.id}" data-ingrd-name="${ingrd.name}" data-ingrd-amount="${ingrd.amount}" data-ingrd-expdate> <!-- ingrd_ihave의 아이디를 가진다.(primaryKey) , oncontextmenu 우측마우스 기본동작 없애기	 -->
+                    		<!-- 재료 영어이름의 띄어쓰기는 '_'로 등록되어있다. -->
+                    		<div class="ingrdIconImg">
+                    			<img class="w-75 h-75" src="/static/images/ingrd/${ingrd.nameEng}.png" alt="" draggable="false">
+                    		</div>
+                    		<span class="font-size-10">${ingrd.name}</span>
+                    	</div>
+                    </c:forEach>
 				</div>
-				<div id="layer1" class="refrigeratorDoor-2 d-flex flex-wrap rounded mr-5" ondrop="drop(event)" ondragover="allowDrop(event)"> 
-				<c:forEach items="${ingrdIhaveList}" var="ingrd">
+				<div>
+				    <span class="text-primary">0~3ºC</span>
+				</div>
+				<div id="layer1" class="refrigeratorDoor-2 d-flex flex-wrap rounded mr-5" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<c:forEach items="${ingrdIhaveList2}" var="ingrd">
 					<div id="${ingrd.id }" class="card cursor ingrdIcon ingrdIhave m-1 text-center pointer" draggable="true" ondragstart="dragstart_handler(event)"
 					 data-toggle="modal" data-target="#my_modal" data-ingrd-id="${ingrd.id}" data-ingrd-name="${ingrd.name}" data-ingrd-amount="${ingrd.amount}" data-ingrd-expdate> <!-- ingrd_ihave의 아이디를 가진다.(primaryKey) , oncontextmenu 우측마우스 기본동작 없애기	 -->
 						<!-- 재료 영어이름의 띄어쓰기는 '_'로 등록되어있다. -->
@@ -44,12 +62,26 @@
 						</div>
 						<span class="font-size-10">${ingrd.name}</span>
 					</div>
-					</c:forEach>
+				</c:forEach>
 				</div>
 			</div>
 			<!-- 냉장실 -->
-			<div class="refrigeratorDoor-3 rounded d-flex align-items-end justify-content-end" ondrop="drop(event)" ondragover="allowDrop(event)"> 
-
+			<div>
+                <div>
+                    <span class="text-primary">3~6ºC</span>
+                </div>
+                <div class="refrigeratorDoor-3 rounded d-flex flex-wrap" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <c:forEach items="${ingrdIhaveList3}" var="ingrd">
+                       <div id="${ingrd.id }" class="card cursor ingrdIcon ingrdIhave m-1 text-center pointer" draggable="true" ondragstart="dragstart_handler(event)"
+                           data-toggle="modal" data-target="#my_modal" data-ingrd-id="${ingrd.id}" data-ingrd-name="${ingrd.name}" data-ingrd-amount="${ingrd.amount}" data-ingrd-expdate> <!-- ingrd_ihave의 아이디를 가진다.(primaryKey) , oncontextmenu 우측마우스 기본동작 없애기	 -->
+                       <!-- 재료 영어이름의 띄어쓰기는 '_'로 등록되어있다. -->
+                           <div class="ingrdIconImg">
+                                <img class="w-75 h-75" src="/static/images/ingrd/${ingrd.nameEng}.png" alt="" draggable="false">
+                           </div>
+                           <span class="font-size-10">${ingrd.name}</span>
+                       </div>
+                    </c:forEach>
+                </div>
 			</div>
 		</div>
 	</div>
@@ -85,7 +117,6 @@
 
 <script>
 	$(document).ready(function(){
-	
  	//triggered when modal is about to be shown
 	$('.ingrdIhave').on('click', function(e){
 		var ingrdId = $(this).data('ingrd-id');
@@ -103,8 +134,6 @@
  	//재료 삭제
 	$('.ingrdDelete').on('click', function(e){
 		var ingrdIhaveId = $(this).parent().siblings('.modal-body').children('#modalIngrdId').val();
-
- 		
  		deleteIngrdIhave(ingrdIhaveId);
 	});
 	
@@ -143,16 +172,27 @@
  	}
  	function drop(e){
  		e.preventDefault();
+
  		var data = e.dataTransfer.getData("text");
  		e.target.appendChild(document.getElementById(data));
  		e.dataTransfer.dropEffect = "copy"
- 		insertIngrdIhave(data);
+
+ 		if($(e.target).hasClass("refrigeratorDoor-1")){
+ 		    //냉장고1 칸으로 들어올 경우
+ 		    insertIngrdIhave(data, 1);
+ 		} else if( $(e.target).hasClass("refrigeratorDoor-2")){
+ 		    //냉장고2 칸으로 들어올 경우
+ 		    insertIngrdIhave(data, 2);
+ 		} else if( $(e.target).hasClass("refrigeratorDoor-3")){
+            //냉장고3 칸으로 들어올 경우
+            insertIngrdIhave(data, 3);
+        }
  	}
- 	function insertIngrdIhave(ingrdId){
+ 	function insertIngrdIhave(ingrdId, num){
  		$.ajax({
  			type:'post'
  			, url: '/ingrd_ihave/insert'
- 			, data: {'ingrdId': ingrdId }
+ 			, data: {'ingrdId': ingrdId, 'refrigeratorNum' : num }
  			, success : function(data){
  				if(data.result="success"){
  					location.reload();
@@ -189,7 +229,6 @@
 			, data : {'ingrdIhaveId' : ingrdIhaveId }
 			, success : function(data){
 				if(data.result == 'success'){
-					alert('성공');
 					location.reload();
 				} else {
 					alert('삭제실패');
