@@ -6,11 +6,13 @@
 <!-- 재료 검색 -->
 	<div class="ingrdSelectBox pt-3">
 		<div class="d-flex mb-2">
-			<div class="d-flex input-group col-6">
-				<input list="ingrdList" type="search" class="form-control" placeholder="재료를 입력하세요.">
-				<div class="input-group-append searchIconBox bg-ligthgray">
-					<a href="#" class="form-control"><img src="/static/images/icon/search.png" class="w-100 h-100"></a>
-				</div>
+		    <div class="col-5">
+                <div class="d-flex input-group w-100">
+                    <input id="inputIngrdName" type="search" class="form-control" placeholder="재료를 입력하세요." onkeyup="filterFunction()">
+                    <div class="input-group-append searchIconBox bg-ligthgray">
+                        <a href="#" class="form-control"><img src="/static/images/icon/search.png" class="w-100 h-100"></a>
+                    </div>
+                </div>
 			</div>
                 <div class="form-control col-2" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" >
                     <img src="/static/images/icon/trashcan.png" width="25px" class="mr-1 pb-1">
@@ -161,6 +163,24 @@
 		}) ; 
 	});
 });
+
+    //재료 검색상자 입력시 해당하는 아이콘 표시
+    function filterFunction() {
+      var input, filter, ul, li, icon, i;
+      input = document.getElementById("inputIngrdName");
+      filter = input.value.toUpperCase();
+      div = document.getElementsByClassName('ingrdIconBox');
+      icon = div[0].getElementsByClassName('ingrdIcon');
+      for (i = 0; i < icon.length; i++) {
+        txtValue = icon[i].textContent || icon[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          icon[i].style.display = "";
+        } else {
+          icon[i].style.display = "none";
+        }
+      }
+    }
+
 	//Drag and Drop//
 	// 재료 추가용
 	 function drag(e){
@@ -238,15 +258,5 @@
 			}
 		});
 	}
-	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
 </script>
     
